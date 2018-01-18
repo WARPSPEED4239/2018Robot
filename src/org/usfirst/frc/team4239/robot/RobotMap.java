@@ -18,9 +18,6 @@ public class RobotMap {
 		drivetrainMotorLeftOne = 1,
 		drivetrainMotorLeftTwo = 2,
 		drivetrainMotorLeftThree = 3,
-		drivetrainMotorRightOne = 4,
-		drivetrainMotorRightTwo = 5,
-		drivetrainMotorRightThree = 6,
 	
 		rgbCanifier = 7;
 	
@@ -37,4 +34,3 @@ public class RobotMap {
 		drivetrainSolenoidHighGear = 1,
 		intakeSolenoidDown = 3,
 		intakeSolenoidUp = 4;
-}

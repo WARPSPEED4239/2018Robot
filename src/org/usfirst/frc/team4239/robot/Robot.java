@@ -28,11 +28,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final Climber Climber = new Climber();
-	public static final Drivetrain Drivetrain = new Drivetrain ();
-	public static final Intake Intake = new Intake();
-	public static final Lift Lift = new Lift();
-	public static final Rgb Rgb = new Rgb();
 	public static OI m_oi;
 
 	Command m_autonomousCommand;

@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimberClimb extends Command {
 
     public ClimberClimb() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time

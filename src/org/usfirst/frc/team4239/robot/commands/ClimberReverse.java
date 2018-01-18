@@ -9,7 +9,6 @@ public class ClimberReverse extends Command {
 
     public ClimberReverse() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
