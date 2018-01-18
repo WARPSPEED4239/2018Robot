@@ -1,0 +1,67 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package org.usfirst.frc.team4239.robot;
+
+import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
+import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+/**
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
+public class OI {
+	public XboxController xbox = new XboxController(0);
+	public Joystick joystick = new Joystick(1);
+	
+	
+	public JoystickButton 
+		xbutton1,
+		xbutton3;
+	
+	public JoystickButton
+		jbutton0,
+		jbutton1,
+		jbutton2,
+		jbutton3,
+		jbutton4,
+		jbutton5,
+		jbutton6,
+		jbutton7,
+		jbutton8,
+		jbutton9,
+		jbutton10,
+		jbutton11,
+		jbutton12;
+	
+	public OI () {
+	xbutton1 = new JoystickButton(xbox, 1);
+	xbutton3 = new JoystickButton(xbox, 3);
+	
+	jbutton0 = new JoystickButton(joystick, 0);
+	jbutton1 = new JoystickButton(joystick, 1);
+	jbutton2 = new JoystickButton(joystick, 2);
+	jbutton3 = new JoystickButton(joystick, 3);
+	jbutton4 = new JoystickButton(joystick, 4);
+	jbutton5 = new JoystickButton(joystick, 5);
+	jbutton6 = new JoystickButton(joystick, 6);
+	jbutton7 = new JoystickButton(joystick, 7);
+	jbutton8 = new JoystickButton(joystick, 8);
+	jbutton9 = new JoystickButton(joystick, 9);
+	jbutton10 = new JoystickButton(joystick, 10);
+	jbutton11 = new JoystickButton(joystick, 11);
+	jbutton12 = new JoystickButton(joystick, 12);
+	
+	
+	xbutton1.whenPressed(new DrivetrainLowGear());
+	xbutton3.whenPressed(new DrivetrainHighGear());
+	}
+}
