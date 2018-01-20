@@ -35,6 +35,6 @@ public class RobotMap {
 	public static int
 		drivetrainSolenoidLowGear = 0,
 		drivetrainSolenoidHighGear = 1,
-		intakeSolenoidDown = 3,
-		intakeSolenoidUp = 4;	
+		intakeSolenoidDown = 2,
+		intakeSolenoidUp = 3;	
 }
