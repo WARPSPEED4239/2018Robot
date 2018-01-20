@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands;
 
+import org.usfirst.frc.team4239.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,6 +15,7 @@ public class ClimberStop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.climber.climberStop();
     }
 
     // Called repeatedly when this Command is scheduled to run

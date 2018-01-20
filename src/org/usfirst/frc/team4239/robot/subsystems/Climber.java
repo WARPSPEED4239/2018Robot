@@ -1,15 +1,32 @@
 package org.usfirst.frc.team4239.robot.subsystems;
 
+import org.usfirst.frc.team4239.robot.RobotMap;
+import org.usfirst.frc.team4239.robot.commands.ClimberStop;
+
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Climber extends Subsystem {
+	
+	private Spark climber = new Spark (RobotMap.climberMotor);
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-    	climberMotor.set(1.0);    
+        setDefaultCommand(new ClimberStop());
+    }    
+    
+    public void climberStop() {
+    	climber.set(0);
+    }
+    
+    public void climberClimb() {
+    	climber.set(1.0);
+    }
+    
+    public void climberReverse() {
+    	climber.set(-1.0);
     }
 }
 

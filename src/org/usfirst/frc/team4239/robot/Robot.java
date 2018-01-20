@@ -28,6 +28,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static Climber climber;
+	public static Drivetrain drivetrain;
+	public static Intake intake;
+	public static Lift lift;
+	public static Rgb rgb;
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
@@ -40,7 +45,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new AutonDriveForwardNoSensors());
+		m_chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
