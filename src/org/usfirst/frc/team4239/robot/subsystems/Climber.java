@@ -29,4 +29,3 @@ public class Climber extends Subsystem {
     	climber.set(-1.0);
     }
 }
-

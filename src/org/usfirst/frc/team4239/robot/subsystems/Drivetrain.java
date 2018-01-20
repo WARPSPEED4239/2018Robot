@@ -31,12 +31,17 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new DrivetrainArcadeDrive());
     }
     
-    public void robotInit() {
+    public void initialize() {
     	
-    drivetrainMotorLeftTwo.follow(drivetrainMotorLeftOne);
-    drivetrainMotorLeftThree.follow(drivetrainMotorLeftOne);
-    drivetrainMotorRightFive.follow(drivetrainMotorRightFour);
-    drivetrainMotorRightSix.follow(drivetrainMotorRightFour);
+    	drivetrainMotorLeftTwo.follow(drivetrainMotorLeftOne);
+    	drivetrainMotorLeftThree.follow(drivetrainMotorLeftOne);
+    	drivetrainMotorRightFive.follow(drivetrainMotorRightFour);
+    	drivetrainMotorRightSix.follow(drivetrainMotorRightFour);
     
     }
+    
+    public void arcadeDrive(double move, double rotate) {
+    	drive.arcadeDrive(move, rotate);
+    }
+    
 }

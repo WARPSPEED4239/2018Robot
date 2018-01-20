@@ -12,7 +12,6 @@ import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
-import org.usfirst.frc.team4239.robot.subsystems.Rgb;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,7 +31,6 @@ public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
 	public static Intake intake;
 	public static Lift lift;
-	public static Rgb rgb;
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
@@ -44,10 +42,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		climber = new Climber();
+		drivetrain = new Drivetrain();
+		intake = new Intake();
+		lift = new Lift();
 		m_oi = new OI();
+		
 		m_chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		drivetrain.initialize();
 	}
 
 	/**
