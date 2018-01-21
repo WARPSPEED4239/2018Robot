@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutonDriveForwardNoSensors extends CommandGroup {
+public class AutonDriveBackwardNoSensors extends CommandGroup {
 
-    public AutonDriveForwardNoSensors() {
-        addSequential(new DrivetrainSetSpeed(0.5, 0.0, 4));
+    public AutonDriveBackwardNoSensors() {
+        addSequential(new DrivetrainSetSpeed(-0.5, 0.0, 4));
     }
 }

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimberReverse extends Command {
 
     public ClimberReverse() {
-        // Use requires() here to declare subsystem dependencies
+        requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time

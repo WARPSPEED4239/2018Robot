@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands;
 
+import org.usfirst.frc.team4239.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,7 +11,7 @@ public class DrivetrainHighGear extends Command {
 
     public DrivetrainHighGear() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time

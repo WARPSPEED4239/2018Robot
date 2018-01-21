@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimberClimb extends Command {
 
     public ClimberClimb() {
+    	requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time

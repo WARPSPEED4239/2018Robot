@@ -7,12 +7,15 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveBackwardNoSensors;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveForwardNoSensors;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,10 +34,10 @@ public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
 	public static Intake intake;
 	public static Lift lift;
-	public static OI m_oi;
+	public static OI oi;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,11 +50,20 @@ public class Robot extends TimedRobot {
 		drivetrain = new Drivetrain();
 		intake = new Intake();
 		lift = new Lift();
-		m_oi = new OI();
+		oi = new OI();
 		
-		m_chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+		cam0.setResolution(320, 240);
+		cam0.setFPS(10);
+		
+		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
+		cam1.setResolution(320, 240);
+		cam1.setFPS(10);
+		
+		
+		chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
+		chooser.addObject("Drive Backwardr No Sensors", new AutonDriveBackwardNoSensors());
+		SmartDashboard.putData("Auto mode", chooser);
 		
 		drivetrain.initialize();
 	}
@@ -84,7 +96,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
