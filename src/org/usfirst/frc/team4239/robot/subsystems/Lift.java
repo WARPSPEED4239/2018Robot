@@ -30,4 +30,3 @@ public class Lift extends Subsystem {
     	lift.set(-1.0);
     }
 }
-
