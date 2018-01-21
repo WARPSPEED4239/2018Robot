@@ -7,8 +7,14 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
+import org.usfirst.frc.team4239.robot.commands.IntakeIn;
+import org.usfirst.frc.team4239.robot.commands.IntakeOut;
+import org.usfirst.frc.team4239.robot.commands.IntakeUp;
+import org.usfirst.frc.team4239.robot.commands.LiftDown;
+import org.usfirst.frc.team4239.robot.commands.LiftUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,40 +34,33 @@ public class OI {
 		xbutton3;
 	
 	public JoystickButton
-		jbutton0,
 		jbutton1,
 		jbutton2,
 		jbutton3,
-		jbutton4,
-		jbutton5,
-		jbutton6,
-		jbutton7,
 		jbutton8,
 		jbutton9,
-		jbutton10,
-		jbutton11,
-		jbutton12;
+		jbutton10;
 	
 	public OI () {
 	xbutton1 = new JoystickButton(xbox, 1);
 	xbutton3 = new JoystickButton(xbox, 3);
 	
-	jbutton0 = new JoystickButton(joystick, 0);
 	jbutton1 = new JoystickButton(joystick, 1);
 	jbutton2 = new JoystickButton(joystick, 2);
 	jbutton3 = new JoystickButton(joystick, 3);
-	jbutton4 = new JoystickButton(joystick, 4);
-	jbutton5 = new JoystickButton(joystick, 5);
-	jbutton6 = new JoystickButton(joystick, 6);
-	jbutton7 = new JoystickButton(joystick, 7);
 	jbutton8 = new JoystickButton(joystick, 8);
 	jbutton9 = new JoystickButton(joystick, 9);
 	jbutton10 = new JoystickButton(joystick, 10);
-	jbutton11 = new JoystickButton(joystick, 11);
-	jbutton12 = new JoystickButton(joystick, 12);
 	
 	
 	xbutton1.whenPressed(new DrivetrainLowGear());
 	xbutton3.whenPressed(new DrivetrainHighGear());
+	
+	jbutton1.whileHeld(new IntakeOut());
+	jbutton2.whileHeld(new IntakeIn());
+	jbutton3.toggleWhenPressed(new IntakeUp());
+	jbutton8.whileHeld(new ClimberClimb());
+	jbutton9.whileHeld(new LiftDown());
+	jbutton10.whileHeld(new LiftUp());
 	}
 }

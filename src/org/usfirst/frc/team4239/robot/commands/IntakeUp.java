@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DrivetrainLowGear extends Command {
+public class IntakeUp extends Command {
 
-    public DrivetrainLowGear() {
+    public IntakeUp() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class DrivetrainLowGear extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.drivetrainLowGear();
+    	Robot.intake.intakeUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
