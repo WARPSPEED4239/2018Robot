@@ -39,7 +39,29 @@ public class Drivetrain extends Subsystem {
     	drivetrainMotorLeftThree.follow(drivetrainMotorLeftOne);
     	drivetrainMotorRightFive.follow(drivetrainMotorRightFour);
     	drivetrainMotorRightSix.follow(drivetrainMotorRightFour);
+    	
+
+        final int PEAK_CURRENT_LIMIT = 45;
+        final int CONTINUOUS_CURRENT_LIMIT = 35;
+        
+        drivetrainMotorLeftOne.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, 0);
+        drivetrainMotorLeftOne.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, 0);
+        drivetrainMotorLeftOne.configPeakCurrentDuration(100, 0);
+        drivetrainMotorLeftOne.enableCurrentLimit(true);
+        
+        drivetrainMotorRightFour.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, 0);
+        drivetrainMotorRightFour.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, 0);
+        drivetrainMotorRightFour.configPeakCurrentDuration(100, 0);
+        drivetrainMotorRightFour.enableCurrentLimit(true);
     
+        
+        drivetrainMotorLeftOne.configOpenloopRamp(2, 0);
+    	drivetrainMotorRightFour.configOpenloopRamp(2, 0);
+    	
+    	drivetrainMotorLeftTwo.configOpenloopRamp(0, 0);
+    	drivetrainMotorLeftThree.configOpenloopRamp(0, 0);
+    	drivetrainMotorRightFive.configOpenloopRamp(0, 0);
+    	drivetrainMotorRightSix.configOpenloopRamp(0, 0);
     }
     
     public void arcadeDrive(double move, double rotate) {
