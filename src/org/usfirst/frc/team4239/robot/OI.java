@@ -12,7 +12,7 @@ import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
 import org.usfirst.frc.team4239.robot.commands.IntakeOut;
-import org.usfirst.frc.team4239.robot.commands.IntakeUp;
+import org.usfirst.frc.team4239.robot.commands.IntakePivotUp;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
 
@@ -58,7 +58,7 @@ public class OI {
 	
 	jbutton1.whileHeld(new IntakeOut());
 	jbutton2.whileHeld(new IntakeIn());
-	jbutton3.toggleWhenPressed(new IntakeUp());
+	jbutton3.toggleWhenPressed(new IntakePivotUp());
 	jbutton8.whileHeld(new ClimberClimb());
 	jbutton9.whileHeld(new LiftDown());
 	jbutton10.whileHeld(new LiftUp());

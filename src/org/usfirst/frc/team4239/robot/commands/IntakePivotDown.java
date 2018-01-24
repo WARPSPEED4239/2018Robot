@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeDown extends Command {
+public class IntakePivotDown extends Command {
 
-    public IntakeDown() {
+    public IntakePivotDown() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.intake);
+        requires(Robot.intakePivot);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class IntakeDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.intakeDown();
+    	Robot.intakePivot.intakeDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()

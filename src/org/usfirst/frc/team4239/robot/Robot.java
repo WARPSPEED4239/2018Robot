@@ -12,6 +12,7 @@ import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveForwardNoSen
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
+import org.usfirst.frc.team4239.robot.subsystems.IntakePivot;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 
 import edu.wpi.cscore.UsbCamera;
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Drivetrain drivetrain;
 	public static Intake intake;
+	public static IntakePivot intakePivot;
 	public static Lift lift;
 	public static OI oi;
 
@@ -49,6 +51,7 @@ public class Robot extends TimedRobot {
 		climber = new Climber();
 		drivetrain = new Drivetrain();
 		intake = new Intake();
+		intakePivot = new IntakePivot();
 		lift = new Lift();
 		oi = new OI();
 		
