@@ -25,4 +25,3 @@ public class IntakePivot extends Subsystem {
     	intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 }
-
