@@ -17,11 +17,11 @@ public class IntakePivot extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new IntakePivotDown());
     }
-    public void intakeUp () {
+    public void intakePivotUp () {
     	intakeSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void intakeDown() {
+    public void intakePivotDown() {
     	intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 }
