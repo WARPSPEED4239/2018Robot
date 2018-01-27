@@ -3,65 +3,63 @@ package org.usfirst.frc.team4239.robot.subsystems;
 import org.usfirst.frc.team4239.robot.RobotMap;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
 public class Drivetrain extends Subsystem {
 	
-	private DoubleSolenoid drivetrainSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear, RobotMap.drivetrainSolenoidLowGear);
+	private final int PEAK_CURRENT_LIMIT = 45;
+	private final int CONTINUOUS_CURRENT_LIMIT = 35;
+	private final int PEAK_CURRENT_DURATION_MILLIS = 100;
 	
-    WPI_TalonSRX drivetrainMotorLeftOne = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftOne);
-    WPI_TalonSRX drivetrainMotorRightFour = new WPI_TalonSRX(RobotMap.drivetrainMotorRightFour);
-    
-    WPI_TalonSRX drivetrainMotorLeftTwo = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftTwo);
-    WPI_TalonSRX drivetrainMotorRightFive = new WPI_TalonSRX(RobotMap.drivetrainMotorRightFive);
-    WPI_TalonSRX drivetrainMotorLeftThree = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftThree);
-    WPI_TalonSRX drivetrainMotorRightSix = new WPI_TalonSRX(RobotMap.drivetrainMotorRightSix);
-    
-    
-    DifferentialDrive drive = new DifferentialDrive(drivetrainMotorLeftOne, drivetrainMotorRightFour);
+	private final int RAMP_RATE = 2;
 	
+    private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftOne);
+    private WPI_TalonSRX leftSlave1 = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftTwo);
+    private WPI_TalonSRX leftSlave2 = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftThree);
     
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new DrivetrainArcadeDrive());
+    private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.drivetrainMotorRightFour);
+    private WPI_TalonSRX rightSlave1 = new WPI_TalonSRX(RobotMap.drivetrainMotorRightFive);
+    private WPI_TalonSRX rightSlave2 = new WPI_TalonSRX(RobotMap.drivetrainMotorRightSix);
+    
+    private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+    private DoubleSolenoid drivetrainSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear, RobotMap.drivetrainSolenoidLowGear);
+    
+    public Drivetrain() {
+    	leftSlave1.follow(leftMaster);
+    	leftSlave2.follow(leftMaster);
+    	rightSlave1.follow(rightMaster);
+    	rightSlave2.follow(rightMaster);
+        
+        setCurrentLimit(leftMaster);
+        setCurrentLimit(rightMaster);
+
+        leftMaster.configOpenloopRamp(RAMP_RATE, 0);
+    	rightMaster.configOpenloopRamp(RAMP_RATE, 0);
+    	
+    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+    	leftMaster.setSensorPhase(false);
+    	
+    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+    	rightMaster.setSensorPhase(false);
     }
     
-    public void initialize() {
-    	
-    	drivetrainMotorLeftTwo.follow(drivetrainMotorLeftOne);
-    	drivetrainMotorLeftThree.follow(drivetrainMotorLeftOne);
-    	drivetrainMotorRightFive.follow(drivetrainMotorRightFour);
-    	drivetrainMotorRightSix.follow(drivetrainMotorRightFour);
-    	
-
-        final int PEAK_CURRENT_LIMIT = 45;
-        final int CONTINUOUS_CURRENT_LIMIT = 35;
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Left Position", leftMaster.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Left Velocity", leftMaster.getSelectedSensorVelocity(0));
         
-        drivetrainMotorLeftOne.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, 0);
-        drivetrainMotorLeftOne.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, 0);
-        drivetrainMotorLeftOne.configPeakCurrentDuration(100, 0);
-        drivetrainMotorLeftOne.enableCurrentLimit(true);
-        
-        drivetrainMotorRightFour.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, 0);
-        drivetrainMotorRightFour.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, 0);
-        drivetrainMotorRightFour.configPeakCurrentDuration(100, 0);
-        drivetrainMotorRightFour.enableCurrentLimit(true);
+        SmartDashboard.putNumber("Right Position", leftMaster.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Right Velocity", leftMaster.getSelectedSensorVelocity(0));
+    }
     
-        
-        drivetrainMotorLeftOne.configOpenloopRamp(2, 0);
-    	drivetrainMotorRightFour.configOpenloopRamp(2, 0);
-    	
-    	drivetrainMotorLeftTwo.configOpenloopRamp(0, 0);
-    	drivetrainMotorLeftThree.configOpenloopRamp(0, 0);
-    	drivetrainMotorRightFive.configOpenloopRamp(0, 0);
-    	drivetrainMotorRightSix.configOpenloopRamp(0, 0);
+    public void initDefaultCommand() {
+        setDefaultCommand(new DrivetrainArcadeDrive());
     }
     
     public void arcadeDrive(double move, double rotate) {
@@ -75,4 +73,12 @@ public class Drivetrain extends Subsystem {
     public void drivetrainLowGear () {
     	drivetrainSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
+    
+    private void setCurrentLimit(WPI_TalonSRX controller) {
+    	controller.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT, 0);
+    	controller.configPeakCurrentLimit(PEAK_CURRENT_LIMIT, 0);
+    	controller.configPeakCurrentDuration(PEAK_CURRENT_DURATION_MILLIS, 0);
+    	controller.enableCurrentLimit(true);
+    }
+    
 }
