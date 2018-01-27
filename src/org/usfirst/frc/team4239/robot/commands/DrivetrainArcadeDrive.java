@@ -5,7 +5,6 @@ import org.usfirst.frc.team4239.robot.Robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -25,13 +24,7 @@ public class DrivetrainArcadeDrive extends Command {
     protected void execute() {
     	XboxController controller = Robot.oi.xbox;
     	double move = controller.getTriggerAxis(Hand.kRight) - controller.getTriggerAxis(Hand.kLeft);
-    	double rotate = controller.getX(Hand.kLeft);
-    	
-    	System.out.println("move = " + move);
-    	System.out.println("rotate = " + rotate);
-    	
-    	SmartDashboard.putNumber("Move", move);
-    	SmartDashboard.putNumber("Rotate", rotate);
+    	double rotate = - controller.getX(Hand.kLeft);
     	
     	Robot.drivetrain.arcadeDrive(move, rotate);
     }

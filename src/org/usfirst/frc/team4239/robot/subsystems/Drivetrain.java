@@ -5,7 +5,6 @@ import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -13,8 +12,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class Drivetrain extends Subsystem {
-	
-	private DoubleSolenoid drivetrainSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear, RobotMap.drivetrainSolenoidLowGear);
 	
     WPI_TalonSRX drivetrainMotorLeftOne = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftOne);
     WPI_TalonSRX drivetrainMotorRightFour = new WPI_TalonSRX(RobotMap.drivetrainMotorRightFour);
@@ -66,13 +63,5 @@ public class Drivetrain extends Subsystem {
     
     public void arcadeDrive(double move, double rotate) {
     	drive.arcadeDrive(move, rotate);
-    }
-    
-    public void drivetrainHighGear () {
-    	drivetrainSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-    
-    public void drivetrainLowGear () {
-    	drivetrainSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 }

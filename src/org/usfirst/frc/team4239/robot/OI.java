@@ -30,8 +30,8 @@ public class OI {
 	
 	
 	public JoystickButton 
-		xbutton1,
-		xbutton3;
+		xbutton2,
+		xbutton4;
 	
 	public JoystickButton
 		jbutton1,
@@ -42,8 +42,8 @@ public class OI {
 		jbutton10;
 	
 	public OI () {
-	xbutton1 = new JoystickButton(xbox, 1);
-	xbutton3 = new JoystickButton(xbox, 3);
+	xbutton2 = new JoystickButton(xbox, 2);
+	xbutton4 = new JoystickButton(xbox, 3);
 	
 	jbutton1 = new JoystickButton(joystick, 1);
 	jbutton2 = new JoystickButton(joystick, 2);
@@ -53,8 +53,8 @@ public class OI {
 	jbutton10 = new JoystickButton(joystick, 10);
 	
 	
-	xbutton1.whenPressed(new DrivetrainLowGear());
-	xbutton3.whenPressed(new DrivetrainHighGear());
+	xbutton2.whenPressed(new DrivetrainLowGear());
+	xbutton4.whenPressed(new DrivetrainHighGear());
 	
 	jbutton1.whileHeld(new IntakeOut());
 	jbutton2.whileHeld(new IntakeIn());
