@@ -54,8 +54,8 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("Left Position", leftMaster.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Left Velocity", leftMaster.getSelectedSensorVelocity(0));
         
-        SmartDashboard.putNumber("Right Position", leftMaster.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Right Velocity", leftMaster.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("Right Position", rightMaster.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Right Velocity", rightMaster.getSelectedSensorVelocity(0));
     }
     
     public void initDefaultCommand() {

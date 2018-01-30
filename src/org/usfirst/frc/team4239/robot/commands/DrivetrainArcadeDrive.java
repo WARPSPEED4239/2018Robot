@@ -24,8 +24,8 @@ public class DrivetrainArcadeDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	XboxController controller = Robot.oi.xbox;
-    	double move = controller.getTriggerAxis(Hand.kRight) - controller.getTriggerAxis(Hand.kLeft);
-    	double rotate = controller.getX(Hand.kLeft);
+    	double move = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
+    	double rotate = -controller.getX(Hand.kLeft);
     	
     	System.out.println("move = " + move);
     	System.out.println("rotate = " + rotate);
