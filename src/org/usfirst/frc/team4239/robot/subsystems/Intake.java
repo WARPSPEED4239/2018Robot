@@ -25,12 +25,12 @@ public class Intake extends Subsystem {
     }
     
     public void intakeIn() {
-    	intakeLeft.set(1.0);
-    	intakeRight.set(1.0);
+    	intakeLeft.set(-1);
+    	intakeRight.set(-1);
     }
     
-    public void intakeOut() {
-    	intakeLeft.set(-1.0);
-    	intakeRight.set(-1.0);
+    public void intakeOut(double speed) {
+    	intakeLeft.set(speed);
+    	intakeRight.set(speed);
     }
 }

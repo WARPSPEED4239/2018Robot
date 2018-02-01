@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4239.robot;
 
-import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
@@ -15,6 +14,7 @@ import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.IntakePivotUp;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
+import org.usfirst.frc.team4239.robot.commands.multitasks.ClimberClimbMulti;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -29,9 +29,11 @@ public class OI {
 	public Joystick joystick = new Joystick(1);
 	
 	
-	public JoystickButton 
+	public JoystickButton 									//Label buttons by their letters.
 		xbutton1,
-		xbutton3;
+		xbutton3,
+		xbutton4,
+		xbutton5;
 	
 	public JoystickButton
 		jbutton1,
@@ -59,8 +61,16 @@ public class OI {
 	jbutton1.whileHeld(new IntakeOut());
 	jbutton2.whileHeld(new IntakeIn());
 	jbutton3.toggleWhenPressed(new IntakePivotUp());
-	jbutton8.whileHeld(new ClimberClimb());
+	jbutton8.whileHeld(new ClimberClimbMulti());  				//Need to double check if this works, might have to be when pressed.
 	jbutton9.whileHeld(new LiftDown());
 	jbutton10.whileHeld(new LiftUp());
+	}
+
+	public XboxController getController() {
+		return xbox;
+	}
+
+	public Joystick getJoystick() {
+		return joystick;
 	}
 }
