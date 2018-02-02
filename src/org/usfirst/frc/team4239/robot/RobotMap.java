@@ -27,14 +27,19 @@ public class RobotMap {
 	
 	public static int 
 		climberMotor = 0,
-		intakeMotorLeft = 1,
-		intakeMotorRight = 2,
-		liftMotor = 3;
+		intakeMotorLeft = 1,  			//30 AMPS
+		liftMotor = 2,
+		intakeMotorRight = 3, 			//30 AMPS
+		climberServo = 4;
 	
 	
 	public static int
 		drivetrainSolenoidLowGear = 0,
 		drivetrainSolenoidHighGear = 1,
 		intakePivotSolenoidDown = 2,
-		intakePivotSolenoidUp = 3;	
+		intakePivotSolenoidUp = 3;
+	
+	public static int
+		liftTopSwitch = 0,
+		liftBottomSwitch = 1;
 }

@@ -65,13 +65,12 @@ public class Robot extends TimedRobot {
 		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
 		cam1.setResolution(320, 240);
 		cam1.setFPS(10);
-		
-		
+				
 		chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
 		chooser.addObject("Drive Backwardr No Sensors", new AutonDriveBackwardNoSensors());
 		SmartDashboard.putData("Auto mode", chooser);
 		
-		drivetrain.initialize();
+		//drivetrain.autoInit();
 	}
 
 	/**
@@ -142,6 +141,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	
+		/*drivetrain.periodic();
+		
+		if (oi.xbox.getAButton()) {
+			
+			drivetrain.autoPeriodic();
+		}
+		else { 
+			drivetrain.stop();
+		}*/ 
 	}
 
 	/**
