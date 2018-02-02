@@ -29,14 +29,14 @@ public class IntakeOut extends Command {
     		speed = presetSpeed;
     	}
     	else {
-    		double speedFromJoystick = Robot.oi.getJoystick().getThrottle(); // 1 to -1
-    		speedFromJoystick *= -1;                                         // -1 to 1
-    		speedFromJoystick += 1;                                          // 0 to 2
-    		speedFromJoystick *= 0.35;                                       // 0 to 0.7
-    		speedFromJoystick += 0.70;                                       // 0.3 to 1
+    		double speedFromJoystick = Robot.oi.getJoystick().getThrottle();  // 1 to -1
+    		speedFromJoystick *= -1;                                          // -1 to 1
+    		speedFromJoystick += 1;                                           // 0 to 2
+    		speedFromJoystick *= 0.3;                                         // 0 to 0.6
+    		speedFromJoystick += 0.8;                                         // 0.4 to 1
     		speedFromJoystick -= 0.40;
     		speed = speedFromJoystick;
-    	
+    
     	Robot.intake.intakeOut(speed);
     	
     	}
