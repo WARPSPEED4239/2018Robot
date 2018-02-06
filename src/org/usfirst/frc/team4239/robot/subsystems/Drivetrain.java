@@ -19,7 +19,7 @@ public class Drivetrain extends Subsystem {
 	private final int CONTINUOUS_CURRENT_LIMIT = 35;
 	private final int PEAK_CURRENT_DURATION_MILLIS = 100;
 	
-	private final int RAMP_RATE = 1;
+	private final double RAMP_RATE = 0.5;
 	
     private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftOne);
     private WPI_TalonSRX leftSlave1 = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftTwo);
