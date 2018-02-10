@@ -141,8 +141,16 @@ public class Drivetrain extends Subsystem {
     	return MotionConvert.unitsToDistance(leftMaster.getSelectedSensorPosition(0));
     }
     
+    public double getLeftVelocity() {
+    	return MotionConvert.unitsToVelocity(leftMaster.getSelectedSensorVelocity(0));
+    }
+    
     public double getRightDistance() {
     	return MotionConvert.unitsToDistance(rightMaster.getSelectedSensorPosition(0));
+    }
+    
+    public double getRightVelocity() {
+    	return MotionConvert.unitsToVelocity(rightMaster.getSelectedSensorVelocity(0));
     }
     
     public double getGyroAngle() {
