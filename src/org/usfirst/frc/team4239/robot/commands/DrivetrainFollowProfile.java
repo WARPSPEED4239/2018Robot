@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Trajectory.Segment;
 
@@ -38,9 +39,6 @@ public class DrivetrainFollowProfile extends Command {
         
         mLeftTrajectory = leftTrajectory;
         mRightTrajectory = rightTrajectory;
-        
-        mLeftController = Robot.drivetrain.getLeftController();
-        mRightController = Robot.drivetrain.getRightController();   	
     }
 
     protected void initialize() {
@@ -59,6 +57,10 @@ public class DrivetrainFollowProfile extends Command {
     		mInputError = true;
     		return;
     	}
+    	
+    	mLeftController = Robot.drivetrain.getLeftController();
+        mRightController = Robot.drivetrain.getRightController();  
+    	
     	if (mLeftController == null) {
     		System.err.println("ERROR, mLeftController is Null");
     		mInputError = true;
@@ -104,7 +106,7 @@ public class DrivetrainFollowProfile extends Command {
 
     protected void execute() {
     	if (mInputError || mProfileFinished) {
-    		System.err.println("ERROR, Shit hit the fan");
+    		System.err.println(String.format("Finished in execute. mInputError = %b, mProfileFinished = %b", mInputError, mProfileFinished));
     		return;
     	}
     	
@@ -143,11 +145,50 @@ public class DrivetrainFollowProfile extends Command {
     	if ((elapsedTime > mTrajectoryExpectedTime && sensorInRange)  || elapsedTime > mTrajectoryExpectedTime + PROFILE_TIMEOUT) {
     		mProfileFinished = true;
     	}
+    	
+    	double[] leftPositionData = new double[] {
+    		elapsedTime,
+    		leftSegment.position,
+    		Robot.drivetrain.getLeftDistance()
+    	};
+    	
+    	double[] rightPositionData = new double[] {
+    		elapsedTime,
+    		rightSegment.position,
+    		Robot.drivetrain.getRightDistance()
+    	};
+    	
+    	double[] angleData = new double[] {
+    		elapsedTime,
+    		Math.toDegrees(leftSegment.heading - Math.PI),
+    		Robot.drivetrain.getGyroAngle()
+    	};
+    	
+    	double[] leftVelocityData = new double[] {
+    		elapsedTime,
+    		leftSegment.velocity,
+    		Robot.drivetrain.getLeftVelocity()
+    	};
+    	
+    	double[] rightVelocityData = new double[] {
+        	elapsedTime,
+        	rightSegment.velocity,
+        	Robot.drivetrain.getRightVelocity()
+        };
+    	
+    	SmartDashboard.putNumberArray("leftPositionData", leftPositionData);
+    	SmartDashboard.putNumberArray("rightPositionData", rightPositionData);
+    	SmartDashboard.putNumberArray("angleData", angleData);
+    	SmartDashboard.putNumberArray("leftVelocityData", leftVelocityData);
+    	SmartDashboard.putNumberArray("rightVelocityData", rightVelocityData);
+    	SmartDashboard.putBoolean("onTarget", sensorInRange);
     }
 
     protected boolean isFinished() {
+    	SmartDashboard.putBoolean("mInputError", mInputError);
+    	SmartDashboard.putBoolean("mProfileFinished", mProfileFinished);
         if (mInputError || mProfileFinished) {
-            System.err.println("Finished in isFinished.");
+        	System.err.println(String.format("Finished in isFinished. mInputError = %b, mProfileFinished = %b", mInputError, mProfileFinished));
         }
         return mInputError || mProfileFinished;
     }
@@ -158,4 +199,5 @@ public class DrivetrainFollowProfile extends Command {
 
     protected void interrupted() {
     }
+    
 }
