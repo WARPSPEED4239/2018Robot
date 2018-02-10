@@ -135,6 +135,9 @@ public class DrivetrainFollowProfile extends Command {
 									  KA * rightSegment.acceleration +
 									  KP * rightPositionError;
     	
+    	SmartDashboard.putNumber("desiredLeftVelocity", desiredLeftVelocity);
+    	SmartDashboard.putNumber("desiredRightVelocity", desiredRightVelocity);
+    	
     	mLeftController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredLeftVelocity));
     	mRightController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredRightVelocity));
     
