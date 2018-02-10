@@ -67,7 +67,6 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Drive Backwardr No Sensors", new AutonDriveBackwardNoSensors());
 		SmartDashboard.putData("Auto mode", chooser);
 		
-		//drivetrain.autoInit();
 	}
 
 	/**
@@ -138,16 +137,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-	
-		/*drivetrain.periodic();
-		
-		if (oi.xbox.getAButton()) {
-			
-			drivetrain.autoPeriodic();
-		}
-		else { 
-			drivetrain.stop();
-		}*/ 
 	}
 
 	/**
