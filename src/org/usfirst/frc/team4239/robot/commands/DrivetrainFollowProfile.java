@@ -13,7 +13,7 @@ import jaci.pathfinder.Trajectory.Segment;
 
 public class DrivetrainFollowProfile extends Command {
 
-	private final double KA = 0;
+	private final double KA = 0.075;
 	private final double KP = 0;
 	private final double KG = 0;
 	
@@ -202,5 +202,4 @@ public class DrivetrainFollowProfile extends Command {
 
     protected void interrupted() {
     }
-    
 }

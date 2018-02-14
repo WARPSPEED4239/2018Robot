@@ -3,8 +3,8 @@ package org.usfirst.frc.team4239.robot.motion;
 public class MotionConvert {
     private static final double WHEEL_DIAMETER = 0.5;
     private static final double WHEEL_CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
-    private static final double ENCODER_TO_OUTPUT = (12 / 36) * (24 / 60);
-    private static final double UNITS_PER_ROTATION = 4096;
+    private static final double ENCODER_TO_OUTPUT = (12.0 / 36.0) * (24.0 / 60.0);
+    private static final double UNITS_PER_ROTATION = 4096.0;
     
     public static double unitsToEncoderRotations(double units) {
         return units / UNITS_PER_ROTATION;
@@ -44,7 +44,7 @@ public class MotionConvert {
      */
     public static double velocityToUnits(double velocity) {
         double unitsPerSecond = distanceToUnits(velocity);
-        return unitsPerSecond / 10;
+        return unitsPerSecond / 10.0;
     }
     
     /*
@@ -53,7 +53,7 @@ public class MotionConvert {
      */
     public static double unitsToVelocity(double units) {
         double feetPerHundredMillis = unitsToDistance(units);
-        return feetPerHundredMillis * 10;
+        return feetPerHundredMillis * 10.0;
     }
     
 }

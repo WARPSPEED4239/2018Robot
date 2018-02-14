@@ -4,7 +4,7 @@ import org.usfirst.frc.team4239.robot.RobotMap;
 import org.usfirst.frc.team4239.robot.commands.ClimberStop;
 
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Climber extends Subsystem {
 	
-	private Spark climber = new Spark (RobotMap.climberMotor);
+	private Talon climber = new Talon (RobotMap.climberMotor);
 	
 	private Servo servo = new Servo(RobotMap.climberServo);
 

@@ -35,7 +35,7 @@ public class Lift extends Subsystem {
     
     public void liftDown() {
     	updateSmartDashboard();
-    	lift.set(1);
+    	lift.set(-1.0);
     }
     
     public boolean getTopSwitch() {

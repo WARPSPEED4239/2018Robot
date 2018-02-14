@@ -15,9 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
 	
-	private final int MAX_LEFT_VELOCITY = 12;
-	private final int MAX_RIGHT_VELOCITY = 12;
-	
 	private final int PEAK_CURRENT_LIMIT = 45;
 	private final int CONTINUOUS_CURRENT_LIMIT = 35;
 	private final int PEAK_CURRENT_DURATION_MILLIS = 100;
@@ -57,13 +54,13 @@ public class Drivetrain extends Subsystem {
     	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
     	rightMaster.setSensorPhase(false);
     	
-    	leftMaster.config_kF(0, 1023 / MotionConvert.velocityToUnits(MAX_LEFT_VELOCITY), TIMEOUT_MILLIS);
-    	leftMaster.config_kP(0, 0, TIMEOUT_MILLIS);
+    	leftMaster.config_kF(0, 0.0513, TIMEOUT_MILLIS);
+    	leftMaster.config_kP(0, 0.1, TIMEOUT_MILLIS);
     	leftMaster.config_kI(0, 0, TIMEOUT_MILLIS);
     	leftMaster.config_kD(0, 0, TIMEOUT_MILLIS);
     	
-    	rightMaster.config_kF(0, 1023 / MotionConvert.velocityToUnits(MAX_RIGHT_VELOCITY), TIMEOUT_MILLIS);
-    	rightMaster.config_kP(0, 0, TIMEOUT_MILLIS);
+    	rightMaster.config_kF(0, 0.0519, TIMEOUT_MILLIS);
+    	rightMaster.config_kP(0, 0.1, TIMEOUT_MILLIS);
     	rightMaster.config_kI(0, 0, TIMEOUT_MILLIS);
     	rightMaster.config_kD(0, 0, TIMEOUT_MILLIS);
     	
@@ -75,15 +72,17 @@ public class Drivetrain extends Subsystem {
     
     public WPI_TalonSRX getRightController() {
     	return rightMaster;
-    }
+    } 
     
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Left Position", leftMaster.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Left Velocity", leftMaster.getSelectedSensorVelocity(0));
+    	SmartDashboard.putNumber("Left Position", getLeftDistance());
+        SmartDashboard.putNumber("Left Velocity", getLeftVelocity());
         
-        SmartDashboard.putNumber("Right Position", rightMaster.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Right Velocity", rightMaster.getSelectedSensorVelocity(0));
+        SmartDashboard.putNumber("Right Position", getRightDistance());
+        SmartDashboard.putNumber("Right Velocity", getRightVelocity());
+        
+        SmartDashboard.putNumber("Angle", getGyroAngle());
     }
     
     public void initDefaultCommand() {
