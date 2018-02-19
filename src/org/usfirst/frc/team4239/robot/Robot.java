@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCenterSwitchPlace;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveBackwardNoSensors;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveForwardNoSensors;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
@@ -64,7 +65,8 @@ public class Robot extends TimedRobot {
 		cam1.setFPS(10);
 				
 		chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
-		chooser.addObject("Drive Backwardr No Sensors", new AutonDriveBackwardNoSensors());
+		chooser.addObject("Drive Backward No Sensors", new AutonDriveBackwardNoSensors());
+		chooser.addObject("Center Place Cube", new AutonCenterSwitchPlace());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 	}

@@ -90,6 +90,14 @@ public class Drivetrain extends Subsystem {
     }
     
     public void arcadeDrive(double move, double rotate) {
+    	
+    	final double MIN_MOVE_THRESHOLD = 0.05;
+		final double MIN_ROTATE_THRESHOLD = 0.20;
+		if (Math.abs(move) < MIN_MOVE_THRESHOLD)
+			move = 0.0;
+		if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD)
+			rotate = 0.0;
+		
     	drive.arcadeDrive(move, rotate);
     }
     

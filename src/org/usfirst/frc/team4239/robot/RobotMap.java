@@ -26,11 +26,11 @@ public class RobotMap {
 	
 	
 	public static int 
-		climberMotor = 0,
-		intakeMotorLeft = 1,  			//30 AMPS
-		liftMotor = 2,
+		liftMotor = 0,
+		intakeMotorLeft = 1,			//30 AMPS
+		climberMotor = 2,				
 		intakeMotorRight = 3, 			//30 AMPS
-		climberServo = 4;
+		climberServo = 9;
 	
 	
 	public static int

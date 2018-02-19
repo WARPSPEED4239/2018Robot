@@ -2,32 +2,25 @@ package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DrivetrainArcadeDrive extends Command {
+public class AutonIntakeOut extends Command {
 
-    public DrivetrainArcadeDrive() {
+    public AutonIntakeOut() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.setIsAuto(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	XboxController controller = Robot.oi.xbox;
-    	double move = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
-    	double rotate = -controller.getX(Hand.kLeft);
-    	
-    	Robot.drivetrain.arcadeDrive(move, rotate);
+    	Robot.intake.autonIntakeOut();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +30,7 @@ public class DrivetrainArcadeDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.intakeStop();
     }
 
     // Called when another command which requires one or more of the same

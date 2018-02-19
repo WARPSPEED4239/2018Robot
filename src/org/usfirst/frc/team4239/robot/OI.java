@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4239.robot;
 
-import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
@@ -17,6 +16,7 @@ import org.usfirst.frc.team4239.robot.commands.IntakePivotUp;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonTest;
+import org.usfirst.frc.team4239.robot.commands.multitasks.ClimberClimbMulti;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -67,7 +67,7 @@ public class OI {
 		jButton1.whileHeld(new IntakeOut());
 		jButton2.whileHeld(new IntakeIn());
 		jButton3.toggleWhenPressed(new IntakePivotUp());
-		jButton8.whileHeld(new ClimberClimb());
+		jButton8.whileHeld(new ClimberClimbMulti());
 		jButton9.whileHeld(new LiftDown());
 		jButton10.whileHeld(new LiftUp());
 	}

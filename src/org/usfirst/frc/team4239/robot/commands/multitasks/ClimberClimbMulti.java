@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class ClimberClimbMulti extends CommandGroup {
     public ClimberClimbMulti() {
-    	//addParallel(new LiftDown(), 3);
-    	//addParallel(new WaitCommand(1));
+    	addParallel(new LiftDown(), 3);
+    	addParallel(new WaitCommand(1));
     	addSequential(new ClimberClimb(), 4.5);
     	addParallel(new WaitCommand(2));
     	addSequential(new ClimberServoForward());

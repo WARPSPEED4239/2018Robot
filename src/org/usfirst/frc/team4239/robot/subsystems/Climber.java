@@ -33,10 +33,10 @@ public class Climber extends Subsystem {
     }
     
     public void climberServoForward() {
-    	servo.set(1);
+    	servo.set(1.0);
     }
     
     public void climberServoReverse() {
-    	servo.set(0);
+    	servo.set(0.0);
     }
 }
