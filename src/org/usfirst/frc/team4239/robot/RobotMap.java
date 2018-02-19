@@ -40,6 +40,6 @@ public class RobotMap {
 		intakePivotSolenoidUp = 3;
 	
 	public static int
-		liftTopSwitch = 0,
-		liftBottomSwitch = 1;
+		liftBottomSwitch = 0,
+		liftTopSwitch = 1;
 }
