@@ -29,7 +29,7 @@ public class TrajectoryGenerator {
         
         result.leftTrajectory = modifier.getLeftTrajectory();
         result.rightTrajectory = modifier.getRightTrajectory();
-		
+		result.runtime = result.leftTrajectory.segments[0].dt * result.leftTrajectory.segments.length;
 		return result;
 	}
 }

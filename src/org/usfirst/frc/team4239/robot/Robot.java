@@ -7,9 +7,12 @@
 
 package org.usfirst.frc.team4239.robot;
 
-import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCenterSwitchPlace;
-import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveBackwardNoSensors;
-import org.usfirst.frc.team4239.robot.commands.autonomous.AutonDriveForwardNoSensors;
+import org.usfirst.frc.team4239.robot.State.ControlMode;
+import org.usfirst.frc.team4239.robot.State.ScalePosition;
+import org.usfirst.frc.team4239.robot.State.StartingPosition;
+import org.usfirst.frc.team4239.robot.State.SwitchPosition;
+import org.usfirst.frc.team4239.robot.State.TargetPriority;
+import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
@@ -18,6 +21,7 @@ import org.usfirst.frc.team4239.robot.subsystems.Lift;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,41 +44,53 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	private SendableChooser<ControlMode> controlModeChooser = new SendableChooser<>();
+	private SendableChooser<StartingPosition> positionChooser = new SendableChooser<>();
+	private SendableChooser<TargetPriority> priorityChooser = new SendableChooser<>();
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		
+
 		climber = new Climber();
 		drivetrain = new Drivetrain();
 		intake = new Intake();
 		intakePivot = new IntakePivot();
 		lift = new Lift();
 		oi = new OI();
-		
+
 		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(320, 240);
 		cam0.setFPS(10);
-		
-		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
-		cam1.setResolution(320, 240);
-		cam1.setFPS(10);
-				
-		chooser.addDefault("Drive Forward No Sensors", new AutonDriveForwardNoSensors());
-		chooser.addObject("Drive Backward No Sensors", new AutonDriveBackwardNoSensors());
-		chooser.addObject("Center Place Cube", new AutonCenterSwitchPlace());
-		SmartDashboard.putData("Auto mode", chooser);
-		
+
+		//UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
+		//cam1.setResolution(320, 240);
+		//cam1.setFPS(10);
+
+		controlModeChooser.addDefault("Standard", ControlMode.Standard);
+        controlModeChooser.addObject("No Sensors", ControlMode.NoSensors);
+        controlModeChooser.addObject("Do Nothing", ControlMode.DoNothing);
+        SmartDashboard.putData("Control Mode", controlModeChooser);
+        
+        positionChooser.addDefault("Unknown", StartingPosition.Unknown);
+        positionChooser.addObject("Left", StartingPosition.Left);
+        positionChooser.addObject("Center", StartingPosition.Center);
+        positionChooser.addObject("Right", StartingPosition.Right);
+        SmartDashboard.putData("Starting Position", positionChooser);
+        
+        priorityChooser.addDefault("Unknown", TargetPriority.Unknown);
+        priorityChooser.addObject("Switch", TargetPriority.Switch);
+        priorityChooser.addObject("Scale", TargetPriority.Scale);
+        SmartDashboard.putData("Target Priority", priorityChooser); 
+
 	}
 
 	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+	 * This function is called once each time the robot enters Disabled mode. You
+	 * can use it to reset any subsystem information you want to clear when the
+	 * robot is disabled.
 	 */
 	@Override
 	public void disabledInit() {
@@ -88,24 +104,66 @@ public class Robot extends TimedRobot {
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
+	 * between different autonomous modes using the dashboard. The sendable chooser
+	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+	 * remove all of the chooser code and uncomment the getString code to get the
+	 * auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * <p>
+	 * You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons to
+	 * the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = chooser.getSelected();
+		
+		System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Auto Init Called");
+		
+		drivetrain.setIsAuto(true);
+		
+		ControlMode controlMode = controlModeChooser.getSelected();
+		StartingPosition startingPosition = positionChooser.getSelected();
+		TargetPriority targetPriority = priorityChooser.getSelected();
+		
+		String gameData = getGameData();
+		System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "gameData = " +gameData);
+
+		SwitchPosition switchPosition = SwitchPosition.Unknown;
+		ScalePosition scalePosition = ScalePosition.Unknown;
+
+		if (gameData != null && gameData.length() >= 3) {
+			switch (gameData.charAt(0)) {
+			case 'L':
+				scalePosition = ScalePosition.Left;
+				break;
+			case 'R':
+				scalePosition = ScalePosition.Right;
+				break;
+			default:
+				scalePosition = ScalePosition.Unknown;
+				break;
+			}
+
+			switch (gameData.charAt(1)) {
+			case 'L':
+				switchPosition = SwitchPosition.Left;
+				break;
+			case 'R':
+				switchPosition = SwitchPosition.Right;
+				break;
+			default:
+				switchPosition = SwitchPosition.Unknown;
+				break;
+
+			}
+		}
+		m_autonomousCommand = new AutonCommand(controlMode, startingPosition, targetPriority, switchPosition, scalePosition);
 
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
+		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
+		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
+		 * ExampleCommand(); break; }
 		 */
 
 		// schedule the autonomous command (example)
@@ -146,5 +204,23 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	public String getGameData() {
+		String gameData = null;
+		int retry = 0;
+
+		while ((gameData == null || gameData.length() < 3) && retry < 50) {
+			gameData = DriverStation.getInstance().getGameSpecificMessage();
+			retry++;
+
+			try {
+				Thread.sleep(5);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return gameData;
 	}
 }

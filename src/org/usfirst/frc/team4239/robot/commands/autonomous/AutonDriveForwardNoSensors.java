@@ -12,6 +12,6 @@ public class AutonDriveForwardNoSensors extends CommandGroup {
 
     public AutonDriveForwardNoSensors() {
     	addParallel(new DrivetrainHighGear());
-        addParallel(new DrivetrainSetSpeed(1, 0.0, 4));
+        addParallel(new DrivetrainSetSpeed(0.75, 0.0, 4));
     }
 }
