@@ -29,7 +29,7 @@ public class AutonCommandCenter extends CommandGroup {
 
 		switch (switchPosition) {
 		case Left:
-			points = new Waypoint[] { new Waypoint(3, 7.5, 0), new Waypoint(0, 0, 0) };
+			points = new Waypoint[] { new Waypoint(5.5, 7, 0), new Waypoint(0, 0, 0) };
 			result = TrajectoryGenerator.getTrajectory(points);
 
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
@@ -41,16 +41,16 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new AutonIntakeOut());
 			break;
 		case Right:
-			points = new Waypoint[] { new Waypoint(10, -5.7, 0), new Waypoint(0, 0, 0) };
+			points = new Waypoint[] { new Waypoint(5.5, -6.5, 0), new Waypoint(0, 0, 0) };
 			result = TrajectoryGenerator.getTrajectory(points);
 			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
 			
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addParallel(new DrivetrainHighGear());
-			addParallel(new WaitCommand(2));
-			//addSequential(new LiftUp(), 2);
-			addSequential(new AutonIntakeOut());
+			//addParallel(new DrivetrainHighGear());
+			//addParallel(new WaitCommand(2));
+			//addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
+			addSequential(new LiftUp(), 1.0);
+			//addSequential(new AutonIntakeOut(), 1.5);
 			break;
 		default:
 			addSequential(new AutonCrossAutoLine());
