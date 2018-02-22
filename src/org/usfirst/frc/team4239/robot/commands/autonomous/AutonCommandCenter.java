@@ -6,12 +6,11 @@ import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOut;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
-import org.usfirst.frc.team4239.robot.commands.LiftUp;
+import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryGenerator;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryResult;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import jaci.pathfinder.Waypoint;
 
 public class AutonCommandCenter extends CommandGroup {
@@ -34,11 +33,10 @@ public class AutonCommandCenter extends CommandGroup {
 
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
 			
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
 			addParallel(new DrivetrainHighGear());
-			addParallel(new WaitCommand(2));
-			//addSequential(new LiftUp(), 2);
-			addSequential(new AutonIntakeOut());
+			addParallel(new LiftUpWithTimeout(1.0));
+			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
+			addSequential(new AutonIntakeOut(1.0));
 			break;
 		case Right:
 			points = new Waypoint[] { new Waypoint(5.5, -6.5, 0), new Waypoint(0, 0, 0) };
@@ -46,11 +44,10 @@ public class AutonCommandCenter extends CommandGroup {
 			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
 			
-			//addParallel(new DrivetrainHighGear());
-			//addParallel(new WaitCommand(2));
-			//addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new LiftUp(), 1.0);
-			//addSequential(new AutonIntakeOut(), 1.5);
+			addParallel(new DrivetrainHighGear());
+			addParallel(new LiftUpWithTimeout(1.0));
+			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
+			addSequential(new AutonIntakeOut(1.0));
 			break;
 		default:
 			addSequential(new AutonCrossAutoLine());

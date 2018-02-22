@@ -6,7 +6,6 @@ import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOut;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
-import org.usfirst.frc.team4239.robot.commands.LiftUpWithDelay;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryGenerator;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryResult;
 
@@ -51,9 +50,9 @@ public class AutonCommandRight extends CommandGroup {
 			}
 			
 			addParallel(new DrivetrainHighGear());
-			addParallel(new LiftUpWithDelay(delay, 2));
+			//addParallel(new LiftUpWithDelay(delay, 2));
 			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOut());
+			addSequential(new AutonIntakeOut(1));
 			
         }
         else if (doScale) {
@@ -66,9 +65,9 @@ public class AutonCommandRight extends CommandGroup {
 			}
 			
 			addParallel(new DrivetrainHighGear());
-			addParallel(new LiftUpWithDelay(delay, 4));
+			//addParallel(new LiftUpWithDelay(delay, 4));
 			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOut());
+			addSequential(new AutonIntakeOut(1));
         }
         else {
             addSequential(new AutonCrossAutoLine());
