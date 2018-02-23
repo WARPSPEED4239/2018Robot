@@ -18,24 +18,22 @@ public class DrivetrainArcadeDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drivetrain.setIsAuto(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	XboxController controller = Robot.oi.xbox;
-<<<<<<< HEAD
-    	double move = controller.getTriggerAxis(Hand.kRight) - controller.getTriggerAxis(Hand.kLeft);
-    	double rotate = - controller.getX(Hand.kLeft);
-=======
+
     	double move = -controller.getTriggerAxis(Hand.kRight) + controller.getTriggerAxis(Hand.kLeft);
     	double rotate = -controller.getX(Hand.kLeft);
     	
-    	System.out.println("move = " + move);
-    	System.out.println("rotate = " + rotate);
+
+    	//System.out.println("move = " + move);
+    	//System.out.println("rotate = " + rotate);
     	
-    	SmartDashboard.putNumber("Move", move);
-    	SmartDashboard.putNumber("Rotate", rotate);
->>>>>>> darren
+    	//SmartDashboard.putNumber("Move", move);
+    	//SmartDashboard.putNumber("Rotate", rotate);
     	
     	Robot.drivetrain.arcadeDrive(move, rotate);
     }

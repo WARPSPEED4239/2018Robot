@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
+import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
@@ -14,7 +16,7 @@ import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.IntakePivotUp;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
-import org.usfirst.frc.team4239.robot.commands.multitasks.ClimberClimbMulti;
+import org.usfirst.frc.team4239.robot.commands.autonomous.AutonTest;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,51 +30,44 @@ public class OI {
 	public XboxController xbox = new XboxController(0);
 	public Joystick joystick = new Joystick(1);
 	
-	
-<<<<<<< HEAD
-	public JoystickButton 
-		xbutton2,
-		xbutton4;
-=======
-	public JoystickButton 									//Label buttons by their letters.
-		xbutton2,
-		xbutton4,
-		xbutton5;
->>>>>>> darren
-	
 	public JoystickButton
-		jbutton1,
-		jbutton2,
-		jbutton3,
-		jbutton8,
-		jbutton9,
-		jbutton10;
+		xButtonA,
+		xButtonB,
+		xButtonX,
+		xButtonY;
+
+  public JoystickButton
+		jButton1,
+		jButton2,
+		jButton3,
+		jButton8,
+		jButton9,
+		jButton10;
 	
 	public OI () {
-	xbutton2 = new JoystickButton(xbox, 2);
-<<<<<<< HEAD
-	xbutton4 = new JoystickButton(xbox, 3);
-=======
-	xbutton4 = new JoystickButton(xbox, 4);
->>>>>>> darren
+		xButtonA = new JoystickButton(xbox, 1);
+		xButtonB = new JoystickButton(xbox, 2);
+		xButtonX = new JoystickButton(xbox, 3);
+		xButtonY = new JoystickButton(xbox, 4);
 	
-	jbutton1 = new JoystickButton(joystick, 1);
-	jbutton2 = new JoystickButton(joystick, 2);
-	jbutton3 = new JoystickButton(joystick, 3);
-	jbutton8 = new JoystickButton(joystick, 8);
-	jbutton9 = new JoystickButton(joystick, 9);
-	jbutton10 = new JoystickButton(joystick, 10);
+		jButton1 = new JoystickButton(joystick, 1);
+		jButton2 = new JoystickButton(joystick, 2);
+		jButton3 = new JoystickButton(joystick, 3);
+		jButton8 = new JoystickButton(joystick, 8);
+		jButton9 = new JoystickButton(joystick, 9);
+		jButton10 = new JoystickButton(joystick, 10);
 	
+		xButtonB.whenPressed(new DrivetrainLowGear());
+		xButtonY.whenPressed(new DrivetrainHighGear());
+		xButtonA.whenPressed(new AutonTest());
+		xButtonX.whenPressed(new DrivetrainArcadeDrive());
 	
-	xbutton2.whenPressed(new DrivetrainLowGear());
-	xbutton4.whenPressed(new DrivetrainHighGear());
-	
-	jbutton1.whileHeld(new IntakeOut());
-	jbutton2.whileHeld(new IntakeIn());
-	jbutton3.toggleWhenPressed(new IntakePivotUp());
-	jbutton8.whileHeld(new ClimberClimbMulti());  				//Need to double check if this works, might have to be when pressed.
-	jbutton9.whileHeld(new LiftDown());
-	jbutton10.whileHeld(new LiftUp());
+		jButton1.whileHeld(new IntakeOut());
+		jButton2.whileHeld(new IntakeIn());
+		jButton3.toggleWhenPressed(new IntakePivotUp());
+		jButton8.whileHeld(new ClimberClimb());
+		jButton9.whileHeld(new LiftDown());
+		jButton10.whileHeld(new LiftUp(5));
 	}
 
 	public XboxController getController() {

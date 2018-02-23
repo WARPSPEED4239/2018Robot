@@ -4,17 +4,18 @@ import org.usfirst.frc.team4239.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class LiftUp extends Command {
-	public LiftUp(double timeout) {
+public class LiftUpWithTimeout extends Command {
+	private double mTimeout;
+
+	public LiftUpWithTimeout(double timeout) {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.lift);
+		mTimeout = timeout;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		setTimeout(mTimeout);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -24,7 +25,7 @@ public class LiftUp extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.lift.getTopSwitch();
+		return Robot.lift.getTopSwitch() || isTimedOut();
 	}
 
 	// Called once after isFinished returns true
