@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,10 +19,10 @@ public class Drivetrain extends Subsystem {
 	private final int PEAK_CURRENT_LIMIT = 45;
 	private final int CONTINUOUS_CURRENT_LIMIT = 35;
 	private final int PEAK_CURRENT_DURATION_MILLIS = 100;
-	
 	private final double RAMP_RATE = 0.5;
-	
+  
 	private final int TIMEOUT_MILLIS = 10;
+
 	
     private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftOne);
     private WPI_TalonSRX leftSlave1 = new WPI_TalonSRX(RobotMap.drivetrainMotorLeftTwo);

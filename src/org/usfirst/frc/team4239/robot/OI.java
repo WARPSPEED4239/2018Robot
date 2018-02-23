@@ -30,14 +30,13 @@ public class OI {
 	public XboxController xbox = new XboxController(0);
 	public Joystick joystick = new Joystick(1);
 	
-	
 	public JoystickButton
 		xButtonA,
 		xButtonB,
 		xButtonX,
 		xButtonY;
-	
-	public JoystickButton
+
+  public JoystickButton
 		jButton1,
 		jButton2,
 		jButton3,
@@ -57,7 +56,6 @@ public class OI {
 		jButton8 = new JoystickButton(joystick, 8);
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
-	
 	
 		xButtonB.whenPressed(new DrivetrainLowGear());
 		xButtonY.whenPressed(new DrivetrainHighGear());
