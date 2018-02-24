@@ -13,10 +13,10 @@ import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
+import org.usfirst.frc.team4239.robot.motion.TrajectoryGenerator;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
-import org.usfirst.frc.team4239.robot.subsystems.IntakePivot;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 
 import edu.wpi.cscore.UsbCamera;
@@ -27,6 +27,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Waypoint;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,7 +41,6 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Drivetrain drivetrain;
 	public static Intake intake;
-	public static IntakePivot intakePivot;
 	public static Lift lift;
 	public static OI oi;
 
@@ -57,7 +58,6 @@ public class Robot extends TimedRobot {
 		climber = new Climber();
 		drivetrain = new Drivetrain();
 		intake = new Intake();
-		intakePivot = new IntakePivot();
 		lift = new Lift();
 		oi = new OI();
 
@@ -65,9 +65,9 @@ public class Robot extends TimedRobot {
 		cam0.setResolution(320, 240);
 		cam0.setFPS(10);
 
-		//UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
-		//cam1.setResolution(320, 240);
-		//cam1.setFPS(10);
+		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
+		cam1.setResolution(320, 240);
+		cam1.setFPS(10);
 
 		controlModeChooser.addDefault("Standard", ControlMode.Standard);
         controlModeChooser.addObject("No Sensors", ControlMode.NoSensors);
@@ -84,7 +84,90 @@ public class Robot extends TimedRobot {
         priorityChooser.addObject("Switch", TargetPriority.Switch);
         priorityChooser.addObject("Scale", TargetPriority.Scale);
         SmartDashboard.putData("Target Priority", priorityChooser); 
-
+        
+        State.crossAutoLineTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(8.0, 0, 0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+        
+        
+        
+    	State.leftSwitchTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(6.75, -9.1 , Pathfinder.d2r(-90)),  //Test? probs won't work :(
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+    	
+    	
+		
+		State.leftScaleTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(14.55, 1.0, Pathfinder.d2r(-90)),  //Test? probs won't work :(
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		
+		
+		State.centerLeftSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(5.5, 7.0, 0.0), //DONT TOUCH
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerLeftSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(-4.0, -7.0, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerLeftSwitchThirdTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(3.0, 0, 0), //TEST AND EDIT
+				new Waypoint(0, 0, 0)
+		});
+		
+		State.centerLeftSwitchFourthTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(-2.0, 0, 0), //TEST AND EDIT
+				new Waypoint(0, 0, 0)
+		});
+		
+		State.centerLeftSwitchFifthTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(4.0, 7.0, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		
+		State.centerRightSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(5.5, -6.5, 0.0), //DONT TOUCH
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerRightSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(-4.0, 6.5, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerRightSwitchThirdTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(3.0, 0.0, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerRightSwitchFourthTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(-2.0, 0.0, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.centerRightSwitchFifthTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(4.0, -6.5, 0.0), //TEST AND EDIT
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		
+		
+		State.rightSwitchTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(6.75, 8.2, Pathfinder.d2r(90)), //Test? probs won't work :(
+				new Waypoint(0.0, 0.0, 0.0)
+		});
+		
+		State.rightScaleTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(14.55, -1.0, Pathfinder.d2r(90)), //Test? probs won't work :(
+				new Waypoint(0.0, 0.0, 0.0)
+		});
 	}
 
 	/**

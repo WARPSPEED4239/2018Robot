@@ -13,10 +13,8 @@ import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
 import org.usfirst.frc.team4239.robot.commands.IntakeOut;
-import org.usfirst.frc.team4239.robot.commands.IntakePivotUp;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
-import org.usfirst.frc.team4239.robot.commands.autonomous.AutonTest;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -40,7 +38,6 @@ public class OI {
 	public JoystickButton
 		jButton1,
 		jButton2,
-		jButton3,
 		jButton8,
 		jButton9,
 		jButton10;
@@ -53,7 +50,6 @@ public class OI {
 	
 		jButton1 = new JoystickButton(joystick, 1);
 		jButton2 = new JoystickButton(joystick, 2);
-		jButton3 = new JoystickButton(joystick, 3);
 		jButton8 = new JoystickButton(joystick, 8);
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
@@ -61,15 +57,14 @@ public class OI {
 	
 		xButtonB.whenPressed(new DrivetrainLowGear());
 		xButtonY.whenPressed(new DrivetrainHighGear());
-		xButtonA.whenPressed(new AutonTest());
+		//xButtonA.whenPressed(new AutonTest());			used during auto PID tuning
 		xButtonX.whenPressed(new DrivetrainArcadeDrive());
 	
 		jButton1.whileHeld(new IntakeOut());
 		jButton2.whileHeld(new IntakeIn());
-		jButton3.toggleWhenPressed(new IntakePivotUp());
 		jButton8.whileHeld(new ClimberClimb());
 		jButton9.whileHeld(new LiftDown());
-		jButton10.whileHeld(new LiftUp(5));
+		jButton10.whileHeld(new LiftUp());
 	}
 
 	public XboxController getController() {

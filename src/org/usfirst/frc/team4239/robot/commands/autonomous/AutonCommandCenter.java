@@ -1,17 +1,18 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
+import org.usfirst.frc.team4239.robot.State;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
-import org.usfirst.frc.team4239.robot.commands.AutonIntakeOut;
+import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
+import org.usfirst.frc.team4239.robot.commands.IntakeInWithTimeout;
+import org.usfirst.frc.team4239.robot.commands.LiftDownWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
-import org.usfirst.frc.team4239.robot.motion.TrajectoryGenerator;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryResult;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import jaci.pathfinder.Waypoint;
 
 public class AutonCommandCenter extends CommandGroup {
 
@@ -23,31 +24,56 @@ public class AutonCommandCenter extends CommandGroup {
 			return;
 		}
 
-		Waypoint[] points;
-		TrajectoryResult result;
-
+		TrajectoryResult firstResult;
+		TrajectoryResult secondResult;
+		TrajectoryResult thirdResult;
+		TrajectoryResult fourthResult;
+		TrajectoryResult fifthResult;
+		
 		switch (switchPosition) {
 		case Left:
-			points = new Waypoint[] { new Waypoint(5.5, 7, 0), new Waypoint(0, 0, 0) };
-			result = TrajectoryGenerator.getTrajectory(points);
-
+			firstResult = State.centerLeftSwitchFirstTrajectory;
+			secondResult = State.centerLeftSwitchSecondTrajectory;
+			thirdResult = State.centerLeftSwitchThirdTrajectory;
+			fourthResult = State.centerLeftSwitchFourthTrajectory;
+			fifthResult = State.centerLeftSwitchFifthTrajectory;
+			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
 			
 			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.0));
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOut(1.0));
+			addSequential(new DrivetrainFollowProfile(firstResult.leftTrajectory, firstResult.rightTrajectory));
+			addSequential(new AutonIntakeOutWithTimeout(0.5));
+			//addParallel(new LiftDownWithTimeout(0.75));
+			//addSequential(new DrivetrainFollowProfile(secondResult.leftTrajectory, secondResult.rightTrajectory));
+			//addParallel(new IntakeInWithTimeout(2.5));
+			//addSequential(new DrivetrainFollowProfile(thirdResult.leftTrajectory, thirdResult.rightTrajectory));
+			//addSequential(new DrivetrainFollowProfile(fourthResult.leftTrajectory, fourthResult.rightTrajectory));
+			//addParallel(new LiftUpWithTimeout(1.0));
+			//addSequential(new DrivetrainFollowProfile(fifthResult.leftTrajectory, fifthResult.rightTrajectory));
+			//addSequential(new AutonIntakeOutWithTimeout(0.5));
 			break;
 		case Right:
-			points = new Waypoint[] { new Waypoint(5.5, -6.5, 0), new Waypoint(0, 0, 0) };
-			result = TrajectoryGenerator.getTrajectory(points);
+			firstResult = State.centerRightSwitchFirstTrajectory;
+			secondResult = State.centerRightSwitchSecondTrajectory;
+			thirdResult = State.centerRightSwitchThirdTrajectory;
+			fourthResult = State.centerRightSwitchFourthTrajectory;
+			fifthResult = State.centerRightSwitchFifthTrajectory;
 			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
 			
 			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.0));
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOut(1.0));
+			addSequential(new DrivetrainFollowProfile(firstResult.leftTrajectory, firstResult.rightTrajectory));
+			addSequential(new AutonIntakeOutWithTimeout(0.5));
+			//addParallel(new LiftDownWithTimeout(0.75));
+			//addSequential(new DrivetrainFollowProfile(secondResult.leftTrajectory, secondResult.rightTrajectory));
+			//addParallel(new IntakeInWithTimeout(2.5));
+			//addSequential(new DrivetrainFollowProfile(thirdResult.leftTrajectory, thirdResult.rightTrajectory));
+			//addSequential(new DrivetrainFollowProfile(fourthResult.leftTrajectory, fourthResult.rightTrajectory));
+			//addParallel(new LiftUpWithTimeout(1.0));
+			//addSequential(new DrivetrainFollowProfile(fifthResult.leftTrajectory, fifthResult.rightTrajectory));
+			//addSequential(new AutonIntakeOutWithTimeout(0.5));
 			break;
 		default:
 			addSequential(new AutonCrossAutoLine());
