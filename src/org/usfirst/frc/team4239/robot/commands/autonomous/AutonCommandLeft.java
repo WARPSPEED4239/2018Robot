@@ -42,7 +42,7 @@ public class AutonCommandLeft extends CommandGroup {
 				result = State.leftSwitchTrajectory;
 				
 				addParallel(new DrivetrainHighGear());
-				addParallel(new LiftUpWithTimeout(1.0));
+				addParallel(new LiftUpWithTimeout(1.75));
 				addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
 				addSequential(new AutonIntakeOutWithTimeout(1.0));
 				
@@ -52,7 +52,7 @@ public class AutonCommandLeft extends CommandGroup {
 				
 				addParallel(new DrivetrainHighGear());
 				addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-				addSequential(new LiftUpWithTimeout(2.5));
+				addSequential(new LiftUpWithTimeout(1.75));
 				addSequential(new AutonIntakeOutWithTimeout(1.0));
 	        }
 	        else {

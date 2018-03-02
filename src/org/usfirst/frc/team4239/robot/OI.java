@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4239.robot;
 
 import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
+import org.usfirst.frc.team4239.robot.commands.ClimberReverse;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
@@ -38,6 +39,7 @@ public class OI {
 	public JoystickButton
 		jButton1,
 		jButton2,
+		jbutton7,
 		jButton8,
 		jButton9,
 		jButton10;
@@ -50,6 +52,7 @@ public class OI {
 	
 		jButton1 = new JoystickButton(joystick, 1);
 		jButton2 = new JoystickButton(joystick, 2);
+		jbutton7 = new JoystickButton(joystick, 7);
 		jButton8 = new JoystickButton(joystick, 8);
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
@@ -63,6 +66,7 @@ public class OI {
 		jButton1.whileHeld(new IntakeOut());
 		jButton2.whileHeld(new IntakeIn());
 		jButton8.whileHeld(new ClimberClimb());
+		jbutton7.whileHeld(new ClimberReverse());
 		jButton9.whileHeld(new LiftDown());
 		jButton10.whileHeld(new LiftUp());
 	}

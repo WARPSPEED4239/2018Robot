@@ -107,12 +107,12 @@ public class Robot extends TimedRobot {
 		
 		
 		State.centerLeftSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(5.5, 7.0, 0.0), //DONT TOUCH
+				new Waypoint(6.0, 8.5 , 0.0), //DONT TOUCH
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
-		State.centerLeftSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(-4.0, -7.0, 0.0), //TEST AND EDIT
+		/*State.centerLeftSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+				new Waypoint(-4.0, -6.5, 0.0), //TEST AND EDIT
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
@@ -130,14 +130,14 @@ public class Robot extends TimedRobot {
 				new Waypoint(4.0, 7.0, 0.0), //TEST AND EDIT
 				new Waypoint(0.0, 0.0, 0.0)
 		});
-		
+		*/
 		
 		State.centerRightSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(5.5, -6.5, 0.0), //DONT TOUCH
+				new Waypoint(8.0, -6.75, 0.0), //DONT TOUCH
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
-		State.centerRightSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
+		/*State.centerRightSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
 				new Waypoint(-4.0, 6.5, 0.0), //TEST AND EDIT
 				new Waypoint(0.0, 0.0, 0.0)
 		});
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
-		
+		*/
 		
 		State.rightSwitchTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
 				new Waypoint(6.75, 8.2, Pathfinder.d2r(90)), //Test? probs won't work :(
