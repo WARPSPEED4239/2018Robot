@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
 		
 		
 		State.centerLeftSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(4.0, 10.5 , 0.0), //DONT TOUCH
+				new Waypoint(4.0, 9.25 , 0.0), //DONT TOUCH
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
