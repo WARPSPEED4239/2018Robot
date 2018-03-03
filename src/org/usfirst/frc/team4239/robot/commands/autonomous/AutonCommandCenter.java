@@ -38,7 +38,7 @@ public class AutonCommandCenter extends CommandGroup {
 			fourthResult = State.centerLeftSwitchFourthTrajectory;
 			fifthResult = State.centerLeftSwitchFifthTrajectory;
 			
-			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
+			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Left Trajectory Found");
 			
 			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.75));
@@ -60,7 +60,7 @@ public class AutonCommandCenter extends CommandGroup {
 			fourthResult = State.centerRightSwitchFourthTrajectory;
 			fifthResult = State.centerRightSwitchFifthTrajectory;
 			
-			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Trajectory Found");
+			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Right Trajectory Found");
 			
 			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.75));

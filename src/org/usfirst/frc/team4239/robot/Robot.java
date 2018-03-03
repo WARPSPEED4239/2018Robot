@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
 		
 		
 		State.centerLeftSwitchFirstTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(6.0, 8.5 , 0.0), //DONT TOUCH
+				new Waypoint(4.0, 10.5 , 0.0), //DONT TOUCH
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
@@ -215,7 +215,7 @@ public class Robot extends TimedRobot {
 		ScalePosition scalePosition = ScalePosition.Unknown;
 
 		if (gameData != null && gameData.length() >= 3) {
-			switch (gameData.charAt(0)) {
+			switch (gameData.charAt(1)) {
 			case 'L':
 				scalePosition = ScalePosition.Left;
 				break;
@@ -227,7 +227,7 @@ public class Robot extends TimedRobot {
 				break;
 			}
 
-			switch (gameData.charAt(1)) {
+			switch (gameData.charAt(0)) {
 			case 'L':
 				switchPosition = SwitchPosition.Left;
 				break;
