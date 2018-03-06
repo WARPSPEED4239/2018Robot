@@ -4,16 +4,12 @@ import org.usfirst.frc.team4239.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class AutonIntakeOut extends Command {
-
+public class LiftDownWithTimeout extends Command {
 	private double mTimeout;
 
-	public AutonIntakeOut(double timeout) {
+	public LiftDownWithTimeout(double timeout) {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.intake);
+		requires(Robot.lift);
 		mTimeout = timeout;
 	}
 
@@ -24,17 +20,17 @@ public class AutonIntakeOut extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.intake.autonIntakeOut();
-		}
+		Robot.lift.liftDown();
+	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		return Robot.lift.getBottomSwitch() || isTimedOut();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.intake.intakeStop();
+		Robot.lift.liftStop();
 	}
 
 	// Called when another command which requires one or more of the same

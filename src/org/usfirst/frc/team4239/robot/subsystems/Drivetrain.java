@@ -19,8 +19,8 @@ public class Drivetrain extends Subsystem {
 	private final int PEAK_CURRENT_LIMIT = 45;
 	private final int CONTINUOUS_CURRENT_LIMIT = 35;
 	private final int PEAK_CURRENT_DURATION_MILLIS = 100;
-	private final double RAMP_RATE = 0.5;
-  
+	
+	private final double RAMP_RATE = 0.2;
 	private final int TIMEOUT_MILLIS = 10;
 
 	

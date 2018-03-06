@@ -19,7 +19,7 @@ public class DrivetrainFollowProfile extends Command {
 	
 	private final double ACCEPTABLE_DISTANCE_ERROR = .125;
 	private final double ACCEPTABLE_ANGLE_ERROR = 5;
-	private final double PROFILE_TIMEOUT = 2; 
+	private final double PROFILE_TIMEOUT = 0.25; 
 	
 	private Trajectory mLeftTrajectory;
 	private Trajectory mRightTrajectory;
