@@ -6,7 +6,6 @@ import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeInWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.LiftDownWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
@@ -40,7 +39,6 @@ public class AutonCommandCenter extends CommandGroup {
 			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Left Trajectory Found");
 			
-			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.75));
 			addSequential(new DrivetrainFollowProfile(firstResult.leftTrajectory, firstResult.rightTrajectory));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
@@ -62,7 +60,6 @@ public class AutonCommandCenter extends CommandGroup {
 			
 			System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "Right Trajectory Found");
 			
-			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.75));
 			addSequential(new DrivetrainFollowProfile(firstResult.leftTrajectory, firstResult.rightTrajectory));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));

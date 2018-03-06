@@ -31,13 +31,6 @@ public class RobotMap {
 		climberMotor = 2,				
 		intakeMotorRight = 3; 			//30 AMPS
 	
-	
-	public static int
-		drivetrainSolenoidLowGear = 0,
-		drivetrainSolenoidHighGear = 1,
-		intakePivotSolenoidDown = 2,
-		intakePivotSolenoidUp = 3;
-	
 	public static int
 		liftBottomSwitch = 0,
 		liftTopSwitch = 1;

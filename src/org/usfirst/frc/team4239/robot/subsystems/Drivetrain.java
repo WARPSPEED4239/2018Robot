@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -35,7 +34,6 @@ public class Drivetrain extends Subsystem {
     private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     
     private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
-    private DoubleSolenoid drivetrainSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear, RobotMap.drivetrainSolenoidLowGear);
     
     public Drivetrain() {
     	leftSlave1.follow(leftMaster);
@@ -100,14 +98,6 @@ public class Drivetrain extends Subsystem {
 			rotate = 0.0;
 		
     	drive.arcadeDrive(move, rotate);
-    }
-    
-    public void drivetrainHighGear () {
-    	drivetrainSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-    
-    public void drivetrainLowGear () {
-    	drivetrainSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void stop () {

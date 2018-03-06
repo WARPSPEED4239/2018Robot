@@ -10,8 +10,6 @@ package org.usfirst.frc.team4239.robot;
 import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.ClimberReverse;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
 import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
@@ -56,8 +54,6 @@ public class OI {
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
 	
-		xButtonB.whenPressed(new DrivetrainLowGear());
-		xButtonY.whenPressed(new DrivetrainHighGear());
 		//xButtonA.whenPressed(new AutonTest());			used during auto PID tuning
 		xButtonX.whenPressed(new DrivetrainArcadeDrive());
 	
