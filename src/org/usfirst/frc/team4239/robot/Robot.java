@@ -16,6 +16,7 @@ import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryGenerator;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4239.robot.subsystems.DrivetrainShifting;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 
@@ -40,6 +41,7 @@ import jaci.pathfinder.Waypoint;
 public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Drivetrain drivetrain;
+	public static DrivetrainShifting drivetrainShifting;
 	public static Intake intake;
 	public static Lift lift;
 	public static OI oi;
@@ -57,6 +59,7 @@ public class Robot extends TimedRobot {
 
 		climber = new Climber();
 		drivetrain = new Drivetrain();
+		drivetrainShifting = new DrivetrainShifting();
 		intake = new Intake();
 		lift = new Lift();
 		oi = new OI();
