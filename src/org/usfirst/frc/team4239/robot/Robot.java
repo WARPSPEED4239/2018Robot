@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
 		});
 		
 		/*State.centerLeftSwitchSecondTrajectory = TrajectoryGenerator.getTrajectory(new Waypoint[] {
-				new Waypoint(-4.0, -6.5, 0.0), //TEST AND EDIT
+				new Waypoint(-4.0, -6.5, 0.0), //TEST AND EDIT PLZ
 				new Waypoint(0.0, 0.0, 0.0)
 		});
 		
