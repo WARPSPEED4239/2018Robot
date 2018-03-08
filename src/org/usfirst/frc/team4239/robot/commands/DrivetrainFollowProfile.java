@@ -40,8 +40,14 @@ public class DrivetrainFollowProfile extends Command {
     	
     	Robot.drivetrain.setIsAuto(true);
     	
-    	if (mResult == null || !mResult.isValid()) {
-    		System.err.println("ERROR, profile in not valid");
+    	if (mResult == null) {
+    		Logger.log("The trajectory is null. Have you given it enough time to compute?");
+    		mInputError = true;
+    		return;
+    	}
+    	
+    	if (!mResult.isValid()) {
+    		Logger.log("The trajectory is invalid. Something is wrong.");
     		mInputError = true;
     		return;
     	}
