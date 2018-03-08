@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.motion.MotionConvert;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -25,8 +26,15 @@ public class DrivetrainCalculateTrackWidth extends Command {
 
     protected void execute() {
     	double rotate = Robot.oi.getController().getX(Hand.kLeft);
-    	Robot.drivetrain.getLeftController().set(ControlMode.Velocity, 5 * rotate);
-    	Robot.drivetrain.getRightController().set(ControlMode.Velocity, -5 * rotate);
+    	
+    	if (Math.abs(rotate) < 0.05) {
+    		rotate = 0;
+    	}
+    	
+    	double speed = MotionConvert.velocityToUnits(5 * rotate);
+    	
+    	Robot.drivetrain.getLeftController().set(ControlMode.Velocity, speed);
+    	Robot.drivetrain.getRightController().set(ControlMode.Velocity, -speed);
     	
     	mTrackWidth = (Math.abs(Robot.drivetrain.getLeftDistance()) + Math.abs(Robot.drivetrain.getRightDistance())) / (2 * Math.PI * mTimesToSpin);
     	SmartDashboard.putNumber("TrackWidth", mTrackWidth);
