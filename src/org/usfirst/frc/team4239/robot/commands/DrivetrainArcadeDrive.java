@@ -29,8 +29,8 @@ public class DrivetrainArcadeDrive extends Command {
     	double rotate = -controller.getX(Hand.kLeft);
     	
 
-    	//System.out.println("move = " + move);
-    	//System.out.println("rotate = " + rotate);
+    	System.out.println("move = " + move);
+    	System.out.println("rotate = " + rotate);
     	
     	//SmartDashboard.putNumber("Move", move);
     	//SmartDashboard.putNumber("Rotate", rotate);
