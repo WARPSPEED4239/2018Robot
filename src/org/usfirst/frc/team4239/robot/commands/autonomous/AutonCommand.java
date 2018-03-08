@@ -1,10 +1,10 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
-import org.usfirst.frc.team4239.robot.State.ControlMode;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
+import org.usfirst.frc.team4239.robot.tools.Logger;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -13,20 +13,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonCommand extends CommandGroup {
 
-	public AutonCommand(ControlMode controlMode, StartingPosition startingPosition, TargetPriority targetPriority,
-			SwitchPosition switchPosition, ScalePosition scalePosition) {
-
-		System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "AutonCommand");
+	public AutonCommand(StartingPosition startingPosition, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
+		Logger.log("AutonCommand");
+		Logger.log("StartingPosition: " + startingPosition.name());
+		Logger.log("TargetPriority: " + targetPriority.name());
+		Logger.log("SwitchPosition: " + switchPosition.name());
+		Logger.log("Scale Position: " + scalePosition.name());
 		
-		if (controlMode == ControlMode.DoNothing) {
+		if (targetPriority == TargetPriority.DoNothing) {
 			return;
 		}
-
-		if (controlMode == ControlMode.NoSensors) {
+		
+		if (targetPriority == TargetPriority.DriveNoSensors) {
 			addSequential(new AutonDriveForwardNoSensors());
 			return;
 		}
-
+		
 		switch (startingPosition) {
 		case Left:
 			addSequential(new AutonCommandLeft(targetPriority, switchPosition, scalePosition));

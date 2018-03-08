@@ -1,21 +1,20 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
-import org.usfirst.frc.team4239.robot.State;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
-import org.usfirst.frc.team4239.robot.motion.TrajectoryResult;
+import org.usfirst.frc.team4239.robot.motion.Trajectories;
+import org.usfirst.frc.team4239.robot.tools.Logger;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonCommandRight extends CommandGroup {
 
     public AutonCommandRight(TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
-    	System.out.println(String.valueOf(System.currentTimeMillis()) + ">> " + "AutonCommandRight");
+    	Logger.log("AutonCommandRight");
     	
         if (targetPriority == TargetPriority.Drive || targetPriority == TargetPriority.Unknown) {
             addSequential(new AutonCrossAutoLine());
@@ -35,26 +34,24 @@ public class AutonCommandRight extends CommandGroup {
         else if (scalePosition == ScalePosition.Right) {
             doScale = true;
         }
-       
-		TrajectoryResult result;
         
         if (doSwitch) {
-			result = State.rightSwitchTrajectory;
-		
-			addParallel(new DrivetrainHighGear());
-			addParallel(new LiftUpWithTimeout(1.75));
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOutWithTimeout(1));
-			
+        	addSequential(new DrivetrainFollowProfile(Trajectories.driveForward12Ft));
+			addParallel(new LiftUpWithTimeout(1.5));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
+			addSequential(new AutonIntakeOutWithTimeout(1.0));
         }
+        /*
         else if (doScale) {
-			result = State.rightScaleTrajectory;
-			
-			addParallel(new DrivetrainHighGear());
-			addParallel(new LiftUpWithTimeout(1.75));
-			addSequential(new DrivetrainFollowProfile(result.leftTrajectory, result.rightTrajectory));
-			addSequential(new AutonIntakeOutWithTimeout(1));
+        	addSequential(new DrivetrainFollowProfile(Trajectories.driveForward25Ft));
+			addParallel(new LiftUpWithTimeout(3.5));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
+			addSequential(new AutonIntakeOutWithTimeout(1.0));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
         }
+        */
         else {
             addSequential(new AutonCrossAutoLine());
         }

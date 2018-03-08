@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.State.CodeExecutionState;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -41,4 +43,6 @@ public class RobotMap {
 	public static int
 		liftBottomSwitch = 0,
 		liftTopSwitch = 1;
+	
+	public static CodeExecutionState executionState = CodeExecutionState.Debug;
 }
