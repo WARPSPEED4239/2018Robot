@@ -55,8 +55,9 @@ public class OI {
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
 	
-		xButtonA.whenPressed(new DrivetrainCalculateTrackWidth(5));
 		xButtonX.whenPressed(new DrivetrainArcadeDrive());
+		xButtonA.whenPressed(new DrivetrainCalculateTrackWidth(-90));
+		xButtonB.whenPressed(new DrivetrainCalculateTrackWidth(90));
 	
 		jButton1.whileHeld(new IntakeOut());
 		jButton2.whileHeld(new IntakeIn());

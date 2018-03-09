@@ -5,15 +5,15 @@ import org.usfirst.frc.team4239.robot.tools.Logger;
 import jaci.pathfinder.Waypoint;
 
 public class Trajectories {
-	private static final double kDefaultMaxVelocity = 8;
-	private static final double kDefaultMaxAcceleration = 4;
-	private static final double kDefaultMaxJerk = 40;
+	public static final double kDefaultMaxVelocity = 8;
+	public static final double kDefaultMaxAcceleration = 4;
+	public static final double kDefaultMaxJerk = 40;
 	
 	public static void initialize() {
 		Logger.log("Trajectory initialization started.");
 		crossAutoLine = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 8.0);
 		centerToLeftSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-				new Waypoint(8.33, 8.0, 0),
+				new Waypoint(8.33, 5.33, 0),
 				new Waypoint(0, 0, 0)
 		});
 		centerToRightSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
@@ -21,6 +21,8 @@ public class Trajectories {
 			new Waypoint(0, 0, 0)
 		});
 		driveForward1Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 1);
+		driveForward5Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 5);
+		driveForward7Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 7);
 		driveForward12Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 12);
 		driveForward25Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 25);
 		driveBackward3Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -3);
@@ -35,6 +37,8 @@ public class Trajectories {
 	public static TrajectoryResult centerToRightSwitch;
 	
 	public static TrajectoryResult driveForward1Ft;
+	public static TrajectoryResult driveForward5Ft;
+	public static TrajectoryResult driveForward7Ft;
 	public static TrajectoryResult driveForward12Ft;
 	public static TrajectoryResult driveForward25Ft;
 	
