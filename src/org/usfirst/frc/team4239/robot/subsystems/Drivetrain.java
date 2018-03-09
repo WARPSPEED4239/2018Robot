@@ -53,12 +53,12 @@ public class Drivetrain extends Subsystem {
     	rightMaster.setSensorPhase(false);
     	
     	leftMaster.config_kF(0, 0.0513, TIMEOUT_MILLIS);
-    	leftMaster.config_kP(0, 0.1, TIMEOUT_MILLIS);
+    	leftMaster.config_kP(0, 0.03, TIMEOUT_MILLIS);
     	leftMaster.config_kI(0, 0, TIMEOUT_MILLIS);
     	leftMaster.config_kD(0, 0, TIMEOUT_MILLIS);
     	
     	rightMaster.config_kF(0, 0.0519, TIMEOUT_MILLIS);
-    	rightMaster.config_kP(0, 0.1, TIMEOUT_MILLIS);
+    	rightMaster.config_kP(0, 0.03, TIMEOUT_MILLIS);
     	rightMaster.config_kI(0, 0, TIMEOUT_MILLIS);
     	rightMaster.config_kD(0, 0, TIMEOUT_MILLIS);
     	

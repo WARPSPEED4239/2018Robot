@@ -13,11 +13,11 @@ public class Trajectories {
 		Logger.log("Trajectory initialization started.");
 		crossAutoLine = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 8.0);
 		centerToLeftSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-				new Waypoint(8.33, 5.33, 0),
+				new Waypoint(8.33, 8.0, 0),
 				new Waypoint(0, 0, 0)
 		});
 		centerToRightSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-			new Waypoint(8.33, -4.5, 0),
+			new Waypoint(8.33, -4.0, 0),
 			new Waypoint(0, 0, 0)
 		});
 		driveForward1Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 1);
