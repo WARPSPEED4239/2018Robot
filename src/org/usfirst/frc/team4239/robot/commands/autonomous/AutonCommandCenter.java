@@ -27,8 +27,8 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToLeftSwitch));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 			
-			/* Backup - Drive Straight, Rotate, etc...
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
+			
+			/*addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward5Ft));
 			addParallel(new LiftUpWithTimeout(1.5));

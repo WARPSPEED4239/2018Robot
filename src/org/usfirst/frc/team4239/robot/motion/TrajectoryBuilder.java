@@ -8,8 +8,7 @@ import jaci.pathfinder.modifiers.TankModifier;
 public class TrajectoryBuilder {
 	
 	public static final double DELTA_TIME = 0.05;
-	public static final double WHEEL_BASE_WIDTH = 1.805;
-	
+	public static final double WHEEL_BASE_WIDTH = 2.75;
 	public static TrajectoryResult getStraightLineTrajectory(double maxVelocity, double maxAcceleration, double maxJerk, double targetDistance) {
 		Waypoint[] points = new Waypoint[] {
 			new Waypoint(Math.abs(targetDistance), 0, 0),

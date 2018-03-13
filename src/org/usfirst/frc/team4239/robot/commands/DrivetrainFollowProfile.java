@@ -1,13 +1,10 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
-import org.usfirst.frc.team4239.robot.RobotMap;
-import org.usfirst.frc.team4239.robot.State.CodeExecutionState;
 import org.usfirst.frc.team4239.robot.motion.MotionConvert;
 import org.usfirst.frc.team4239.robot.motion.ProfilePoint;
 import org.usfirst.frc.team4239.robot.motion.TrajectoryResult;
 import org.usfirst.frc.team4239.robot.tools.Logger;
-import org.usfirst.frc.team4239.robot.tools.Plot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -22,16 +19,19 @@ public class DrivetrainFollowProfile extends Command {
 	private final double ACCEPTABLE_DISTANCE_ERROR = .125;
 	private final double PROFILE_TIMEOUT = 0.25; 
 	
-	private TrajectoryResult mResult;
+	private TrajectoryResult mProfile;
 	private WPI_TalonSRX mLeftController;
 	private WPI_TalonSRX mRightController;
 
 	private boolean mInputError;
 	private boolean mProfileFinished;
 	
-    public DrivetrainFollowProfile(TrajectoryResult result) {
+	private double mLeftFinishDistance;
+	private double mRightFinishDistance;
+	
+    public DrivetrainFollowProfile(TrajectoryResult profile) {
         requires(Robot.drivetrain);
-        mResult = result;
+        mProfile = profile;
     }
 
     protected void initialize() {
@@ -40,17 +40,20 @@ public class DrivetrainFollowProfile extends Command {
     	
     	Robot.drivetrain.setIsAuto(true);
     	
-    	if (mResult == null) {
+    	if (mProfile == null) {
     		Logger.log("The trajectory is null. Have you given it enough time to compute?");
     		mInputError = true;
     		return;
     	}
     	
-    	if (!mResult.isValid()) {
+    	if (!mProfile.isValid()) {
     		Logger.log("The trajectory is invalid. Something is wrong.");
     		mInputError = true;
     		return;
     	}
+    	
+    	mLeftFinishDistance = mProfile.getLastLeftPoint().position;
+    	mRightFinishDistance = mProfile.getLastRightPoint().position;
     	
     	mLeftController = Robot.drivetrain.getLeftController();
         mRightController = Robot.drivetrain.getRightController();  
@@ -77,8 +80,8 @@ public class DrivetrainFollowProfile extends Command {
     	
     	double elapsedTime = timeSinceInitialized();
     	
-    	ProfilePoint left = mResult.getLeftAtTime(elapsedTime);
-    	ProfilePoint right = mResult.getRightAtTime(elapsedTime);
+    	ProfilePoint left = mProfile.getLeftAtTime(elapsedTime);
+    	ProfilePoint right = mProfile.getRightAtTime(elapsedTime);
     	
     	double leftPositionError = left.position - Robot.drivetrain.getLeftDistance();
     	double rightPositionError = right.position - Robot.drivetrain.getRightDistance();
@@ -91,18 +94,24 @@ public class DrivetrainFollowProfile extends Command {
 									  KA * right.acceleration +
 									  KP * rightPositionError;
     	
-    	mLeftController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredLeftVelocity));
-    	mRightController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredRightVelocity));
-    
-    	boolean sensorInRange = Math.abs(leftPositionError) < ACCEPTABLE_DISTANCE_ERROR &&
-    							Math.abs(rightPositionError) < ACCEPTABLE_DISTANCE_ERROR;
-    	
-    	if ((elapsedTime > mResult.getRuntime() && sensorInRange)  || elapsedTime > mResult.getRuntime() + PROFILE_TIMEOUT) {
-    		mProfileFinished = true;
+    	// Don't allow thrashing if we haven't completed the profile
+    	if (elapsedTime < mProfile.getRuntime()) {
+    		if (Math.signum(desiredLeftVelocity) != Math.signum(mLeftFinishDistance)) {
+    			desiredLeftVelocity = 0;
+    		}
+    		if (Math.signum(desiredRightVelocity) != Math.signum(mRightFinishDistance)) {
+    			desiredRightVelocity = 0;
+    		}
     	}
     	
-    	if (RobotMap.executionState == CodeExecutionState.Debug) {
-    		updatePlots(elapsedTime, left, right);
+    	mLeftController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredLeftVelocity));
+    	mRightController.set(ControlMode.Velocity, MotionConvert.velocityToUnits(desiredRightVelocity));
+  
+    	boolean sensorInRange = Math.abs(leftPositionError) < ACCEPTABLE_DISTANCE_ERROR &&
+								Math.abs(rightPositionError) < ACCEPTABLE_DISTANCE_ERROR;
+    	
+    	if ((elapsedTime > mProfile.getRuntime() && sensorInRange)  || elapsedTime > mProfile.getRuntime() + PROFILE_TIMEOUT) {
+    		mProfileFinished = true;
     	}
     }
 
@@ -112,38 +121,10 @@ public class DrivetrainFollowProfile extends Command {
 
     protected void end() {
     	Robot.drivetrain.stop();
-    	if (RobotMap.executionState == CodeExecutionState.Debug) {
-    		publishPlots();
-    	}
     }
 
     protected void interrupted() {
     	Robot.drivetrain.stop();
-    }
-    
-    private Plot leftPositionErrorPlot = new Plot("Time(s)", "Left Position Error(ft)");
-    private Plot leftVelocityErrorPlot = new Plot("Time(s)", "Left Velocity Error(ft/s)");
-    
-    private Plot rightPositionErrorPlot = new Plot("Time(s)", "Right Position Error(ft)");
-    private Plot rightVelocityErrorPlot = new Plot("Time(s)", "Right Velocity Error(ft/s)");
-    
-    
-    private void updatePlots(double elapsedTime, ProfilePoint left, ProfilePoint right) {
-    	double leftPositionError = Robot.drivetrain.getLeftDistance() - left.position;
-    	double leftVelocityError = Robot.drivetrain.getLeftVelocity() - left.velocity;
-    	double rightPositionError = Robot.drivetrain.getRightDistance() - right.position;
-    	double rightVelocityError = Robot.drivetrain.getRightVelocity() - left.velocity;
-    	leftPositionErrorPlot.addDataPoint(elapsedTime, leftPositionError);
-    	leftVelocityErrorPlot.addDataPoint(elapsedTime, leftVelocityError);
-    	rightPositionErrorPlot.addDataPoint(elapsedTime, rightPositionError);
-    	rightVelocityErrorPlot.addDataPoint(elapsedTime, rightVelocityError);
-    }
-    
-    private void publishPlots() {
-		Logger.log(leftPositionErrorPlot.toString(false));
-		Logger.log(leftVelocityErrorPlot.toString(false));
-		Logger.log(rightPositionErrorPlot.toString(false));
-		Logger.log(rightVelocityErrorPlot.toString(false));
     }
     
 }

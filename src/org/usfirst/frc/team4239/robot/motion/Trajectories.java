@@ -13,13 +13,14 @@ public class Trajectories {
 		Logger.log("Trajectory initialization started.");
 		crossAutoLine = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 8.0);
 		centerToLeftSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-				new Waypoint(8.33, 5.33, 0),
+				new Waypoint(9.0, 3.8, 0),
 				new Waypoint(0, 0, 0)
 		});
 		centerToRightSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-			new Waypoint(8.33, -4.0, 0),
+			new Waypoint(8.5, -4.0, 0),
 			new Waypoint(0, 0, 0)
 		});
+		driveBackward2Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -2);
 		driveForward1Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 1);
 		driveForward5Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 5);
 		driveForward7Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 7);
@@ -36,6 +37,7 @@ public class Trajectories {
 	public static TrajectoryResult centerToLeftSwitch;
 	public static TrajectoryResult centerToRightSwitch;
 	
+	public static TrajectoryResult driveBackward2Ft;
 	public static TrajectoryResult driveForward1Ft;
 	public static TrajectoryResult driveForward5Ft;
 	public static TrajectoryResult driveForward7Ft;

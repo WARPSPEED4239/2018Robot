@@ -4,6 +4,7 @@ import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeout;
+import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeoutScale;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
 import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
 import org.usfirst.frc.team4239.robot.motion.Trajectories;
@@ -42,16 +43,15 @@ public class AutonCommandRight extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new AutonIntakeOutWithTimeout(1.0));
         }
-        /*
+        
         else if (doScale) {
         	addSequential(new DrivetrainFollowProfile(Trajectories.driveForward25Ft));
-			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
-			addSequential(new AutonIntakeOutWithTimeout(1.0));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
+			addSequential(new LiftUpWithTimeout(3.5));
+			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
         }
-        */
+        
         else {
             addSequential(new AutonCrossAutoLine());
         }
