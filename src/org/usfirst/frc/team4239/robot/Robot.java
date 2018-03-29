@@ -60,9 +60,11 @@ public class Robot extends TimedRobot {
         positionChooser.addObject("Right", StartingPosition.Right);
         SmartDashboard.putData("Starting Position", positionChooser);
         
-        priorityChooser.addDefault("Unknown", TargetPriority.Unknown);
+        priorityChooser.addDefault("Drive", TargetPriority.Drive);
         priorityChooser.addObject("Switch", TargetPriority.Switch);
         priorityChooser.addObject("Scale", TargetPriority.Scale);
+        priorityChooser.addObject("Drive No Sensors", TargetPriority.DriveNoSensors);
+        priorityChooser.addObject("Do Nothing", TargetPriority.DoNothing);
         SmartDashboard.putData("Target Priority", priorityChooser);
         
         Trajectories.initialize();

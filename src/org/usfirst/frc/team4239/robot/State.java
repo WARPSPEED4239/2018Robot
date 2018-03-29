@@ -6,7 +6,7 @@ public class State {
 	}
 
 	public static enum TargetPriority {
-		Switch, Scale, Drive, DriveNoSensors, DoNothing, Unknown
+		Switch, Scale, Drive, DriveNoSensors, DoNothing
 	}
 
 	public static enum ScalePosition {
