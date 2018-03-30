@@ -2,7 +2,7 @@ package org.usfirst.frc.team4239.robot;
 
 public class State {
 	public static enum StartingPosition {
-		Left, Center, Right, Unknown
+		Left, Center, Right
 	}
 
 	public static enum TargetPriority {

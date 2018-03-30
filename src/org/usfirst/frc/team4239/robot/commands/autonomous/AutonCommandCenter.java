@@ -19,8 +19,17 @@ public class AutonCommandCenter extends CommandGroup {
 			ScalePosition scalePosition) {
 		Logger.log("AutonCommandCenter");
 		
+		if (targetPriority == TargetPriority.DoNothing) {
+			return;
+		}
+		
+		if (targetPriority == TargetPriority.DriveNoSensors) {
+			addSequential(new AutonDriveForwardNoSensors());
+			return;
+		}
+		
 		if (targetPriority == TargetPriority.Drive) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch));  //Fix this if drive forward is jacked up: (new AutonCrossAutoLine()); 
+			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch)); 
 			return;
 		}
 

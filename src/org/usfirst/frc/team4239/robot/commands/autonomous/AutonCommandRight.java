@@ -20,6 +20,15 @@ public class AutonCommandRight extends CommandGroup {
 	public AutonCommandRight(TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandRight");
 
+		if (targetPriority == TargetPriority.DoNothing) {
+			return;
+		}
+		
+		if (targetPriority == TargetPriority.DriveNoSensors) {
+			addSequential(new AutonDriveForwardNoSensors());
+			return;
+		}
+		
 		if (targetPriority == TargetPriority.Drive) {
 			addSequential(new AutonCrossAutoLine());
 			return;
@@ -56,13 +65,13 @@ public class AutonCommandRight extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 			addParallel(new LiftDownWithTimeout(1.0));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
 		}
 
 		else if (doOpSwitch) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward17Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward15Ft));
 			addParallel(new LiftUpWithTimeout(1.5));
@@ -75,19 +84,20 @@ public class AutonCommandRight extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft45Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));
+			addSequential(new WaitCommand(0.75));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
 			addParallel(new LiftDownWithTimeout(3.0));
-			addSequential(new WaitCommand(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
 		}
 
 		else if (doOpScale) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward17Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
-			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight100Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
 		}
 
@@ -95,16 +105,19 @@ public class AutonCommandRight extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft45Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));
+			addSequential(new WaitCommand(0.75));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
 			addParallel(new LiftDownWithTimeout(3.0));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft94Degrees));
-			addParallel(new IntakeInWithTimeout(2.0));
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward6Ft));
-			addSequential(new LiftDownWithTimeout(1.5));
+			addParallel(new IntakeInWithTimeout(1.5));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
+			addSequential(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 		}
+
 
 		else {
 			addSequential(new AutonCrossAutoLine());

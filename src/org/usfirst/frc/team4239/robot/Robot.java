@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
 		cam1.setResolution(320, 240);
 		cam1.setFPS(10);
         
-        positionChooser.addDefault("Unknown", StartingPosition.Unknown);
         positionChooser.addObject("Left", StartingPosition.Left);
         positionChooser.addObject("Center", StartingPosition.Center);
         positionChooser.addObject("Right", StartingPosition.Right);

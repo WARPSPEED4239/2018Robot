@@ -22,7 +22,9 @@ public class Trajectories {
 			new Waypoint(0, 0, 0)
 		});
 		driveForward1Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 1);
+		driveForward2Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 2);
 		driveForward3Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 3);
+		driveForward4Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 4);
 		driveForward6Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 6);
 		driveForward12Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 12);
 		driveForward15Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 15);
@@ -31,12 +33,14 @@ public class Trajectories {
 		driveForward20Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 20);
 		driveBackward2Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -2);
 		driveBackward3Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -3);
-		rotateRight45Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 45);
+		rotateRight45Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 60);
 		rotateLeft45Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -45);
 		rotateRight90Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 90);
 		rotateLeft90Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -90);
 		rotateRight94Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 94);
 		rotateLeft94Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -94);
+		rotateRight100Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 100);
+		rotateLeft100Degrees = TrajectoryBuilder.getRotationTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, -100);
 		Logger.log("Trajecotry initialization complete.");
 	}
 	
@@ -46,7 +50,9 @@ public class Trajectories {
 	public static TrajectoryResult centerToRightSwitch;
 	
 	public static TrajectoryResult driveForward1Ft;
+	public static TrajectoryResult driveForward2Ft;
 	public static TrajectoryResult driveForward3Ft;
+	public static TrajectoryResult driveForward4Ft;
 	public static TrajectoryResult driveForward6Ft;
 	public static TrajectoryResult driveForward12Ft;
 	public static TrajectoryResult driveForward15Ft;
@@ -63,4 +69,6 @@ public class Trajectories {
 	public static TrajectoryResult rotateLeft90Degrees;
 	public static TrajectoryResult rotateRight94Degrees;
 	public static TrajectoryResult rotateLeft94Degrees;
+	public static TrajectoryResult rotateRight100Degrees;
+	public static TrajectoryResult rotateLeft100Degrees;
 }

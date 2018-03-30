@@ -20,15 +20,6 @@ public class AutonCommand extends CommandGroup {
 		Logger.log("SwitchPosition: " + switchPosition.name());
 		Logger.log("Scale Position: " + scalePosition.name());
 		
-		if (targetPriority == TargetPriority.DoNothing) {
-			return;
-		}
-		
-		if (targetPriority == TargetPriority.DriveNoSensors) {
-			addSequential(new AutonDriveForwardNoSensors());
-			return;
-		}
-		
 		switch (startingPosition) {
 		case Left:
 			addSequential(new AutonCommandLeft(targetPriority, switchPosition, scalePosition));
