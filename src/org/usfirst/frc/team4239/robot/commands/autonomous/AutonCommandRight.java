@@ -21,17 +21,17 @@ public class AutonCommandRight extends CommandGroup {
 	public AutonCommandRight(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandRight");
 
-		if (targetPriority == TargetPriority.DoNothing) {
+		if (targetPriority == TargetPriority.Drive) {
+			addSequential(new AutonCrossAutoLine());
 			return;
 		}
-		
+
 		if (targetPriority == TargetPriority.DriveNoSensors) {
 			addSequential(new AutonDriveForwardNoSensors());
 			return;
 		}
 		
-		if (targetPriority == TargetPriority.Drive) {
-			addSequential(new AutonCrossAutoLine());
+		if (targetPriority == TargetPriority.DoNothing) {
 			return;
 		}
 

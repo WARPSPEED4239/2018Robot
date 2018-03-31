@@ -55,19 +55,21 @@ public class Robot extends TimedRobot {
 		UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
 		cam1.setResolution(320, 240);
 		cam1.setFPS(10);
-        
-		typeChooser.addDefault("Task Based", AutoType.TargetBased); 				  //Use when there is no chance of running into another team during autos
-		typeChooser.addObject("Robot Alignment Based", AutoType.RobotAlignmentBased); //Use when another team can handle the scale, switch, and both to minimize running into each other
-		SmartDashboard.putData("Auto Type", typeChooser);
 		
         positionChooser.addObject("Left", StartingPosition.Left);
         positionChooser.addObject("Center", StartingPosition.Center);
         positionChooser.addObject("Right", StartingPosition.Right);
         SmartDashboard.putData("Starting Position", positionChooser);
         
-        priorityChooser.addDefault("Drive", TargetPriority.Drive);
+    	typeChooser.addDefault("N/A", AutoType.NA);
+		typeChooser.addObject("Task Based", AutoType.TargetBased); 				  //Use when there is no chance of running into another team during autos
+		typeChooser.addObject("Robot Alignment Based", AutoType.RobotAlignmentBased); //Use when another team can handle the scale, switch, and both to minimize running into each other
+		SmartDashboard.putData("Auto Type", typeChooser);
+        
+        priorityChooser.addDefault("N/A", TargetPriority.NA);
         priorityChooser.addObject("Switch", TargetPriority.Switch);
         priorityChooser.addObject("Scale", TargetPriority.Scale);
+        priorityChooser.addObject("Drive", TargetPriority.Drive);
         priorityChooser.addObject("Drive No Sensors", TargetPriority.DriveNoSensors);
         priorityChooser.addObject("Do Nothing", TargetPriority.DoNothing);
         SmartDashboard.putData("Target Priority", priorityChooser);

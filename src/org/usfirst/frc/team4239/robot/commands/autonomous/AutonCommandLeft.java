@@ -20,18 +20,18 @@ public class AutonCommandLeft extends CommandGroup {
 
 	public AutonCommandLeft(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandLeft");
-
-		if (targetPriority == TargetPriority.DoNothing) {
+		
+		if (targetPriority == TargetPriority.Drive) {
+			addSequential(new AutonCrossAutoLine());
 			return;
 		}
-		
+
 		if (targetPriority == TargetPriority.DriveNoSensors) {
 			addSequential(new AutonDriveForwardNoSensors());
 			return;
 		}
 		
-		if (targetPriority == TargetPriority.Drive) {
-			addSequential(new AutonCrossAutoLine());
+		if (targetPriority == TargetPriority.DoNothing) {
 			return;
 		}
 

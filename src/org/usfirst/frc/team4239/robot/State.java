@@ -2,7 +2,7 @@ package org.usfirst.frc.team4239.robot;
 
 public class State {
 	public static enum AutoType {
-		RobotAlignmentBased, TargetBased
+		RobotAlignmentBased, TargetBased, NA
 	}
 	
 	public static enum StartingPosition {
@@ -10,7 +10,7 @@ public class State {
 	}
 
 	public static enum TargetPriority {
-		Switch, Scale, Drive, DriveNoSensors, DoNothing
+		Switch, Scale, Drive, DriveNoSensors, DoNothing, NA
 	}
 
 	public static enum ScalePosition {

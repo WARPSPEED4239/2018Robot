@@ -19,7 +19,8 @@ public class AutonCommandCenter extends CommandGroup {
 	public AutonCommandCenter(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandCenter");
 		
-		if (targetPriority == TargetPriority.DoNothing) {
+		if (targetPriority == TargetPriority.Drive) {
+			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch)); 
 			return;
 		}
 		
@@ -28,8 +29,7 @@ public class AutonCommandCenter extends CommandGroup {
 			return;
 		}
 		
-		if (targetPriority == TargetPriority.Drive) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch)); 
+		if (targetPriority == TargetPriority.DoNothing) {
 			return;
 		}
 

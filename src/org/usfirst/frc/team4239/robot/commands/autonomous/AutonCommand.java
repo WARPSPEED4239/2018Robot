@@ -32,6 +32,10 @@ public class AutonCommand extends CommandGroup {
 		case Right:
 			addSequential(new AutonCommandRight(autoType, targetPriority, switchPosition, scalePosition));
 			break;
+		default:
+			// If the position of the robot is not set on the sendable chooser, drive to auto line
+			addSequential(new AutonCrossAutoLine());
+			break;
 		}
 
 	}
