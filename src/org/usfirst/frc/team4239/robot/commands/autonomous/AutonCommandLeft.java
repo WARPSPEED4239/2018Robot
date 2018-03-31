@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
+import org.usfirst.frc.team4239.robot.State.AutoType;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutonCommandLeft extends CommandGroup {
 
-	public AutonCommandLeft(TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
+	public AutonCommandLeft(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandLeft");
 
 		if (targetPriority == TargetPriority.DoNothing) {
@@ -44,19 +45,31 @@ public class AutonCommandLeft extends CommandGroup {
 			doScaleAndSwitch = true;
 		} 
 		
-		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right) {
+		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.TargetBased) {
 			doSwitch = (targetPriority == TargetPriority.Switch);
 			doOpScale = (targetPriority == TargetPriority.Scale);
 		} 
 		
-		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left) {
+		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.TargetBased) {
 			doOpSwitch = (targetPriority == TargetPriority.Switch);
 			doScale = (targetPriority == TargetPriority.Scale);
 		} 
 		
-		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Right) {
+		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Right && autoType == AutoType.TargetBased) {
 			doOpSwitch = (targetPriority == TargetPriority.Switch);
 			doOpScale = (targetPriority == TargetPriority.Scale);
+		}
+		
+		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.RobotAlignmentBased) {
+			doSwitch = true;
+		} 
+		
+		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.RobotAlignmentBased) {
+			doScale = true;
+		} 
+		
+		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Right && autoType == AutoType.RobotAlignmentBased) {
+			doOpScale = true; //CHANGE THIS IF OP SCALE IS GOING TO RUN INTO THERE AUTO TO: addSequential(new AutonCrossAutoLine());
 		}
 
 		if (doSwitch) {

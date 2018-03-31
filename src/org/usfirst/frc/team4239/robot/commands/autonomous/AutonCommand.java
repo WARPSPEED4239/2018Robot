@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
+import org.usfirst.frc.team4239.robot.State.AutoType;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
@@ -13,8 +14,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonCommand extends CommandGroup {
 
-	public AutonCommand(StartingPosition startingPosition, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
+	public AutonCommand(AutoType autoType,StartingPosition startingPosition, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommand");
+		Logger.log("AutoType: " + autoType.name());
 		Logger.log("StartingPosition: " + startingPosition.name());
 		Logger.log("TargetPriority: " + targetPriority.name());
 		Logger.log("SwitchPosition: " + switchPosition.name());
@@ -22,13 +24,13 @@ public class AutonCommand extends CommandGroup {
 		
 		switch (startingPosition) {
 		case Left:
-			addSequential(new AutonCommandLeft(targetPriority, switchPosition, scalePosition));
+			addSequential(new AutonCommandLeft(autoType, targetPriority, switchPosition, scalePosition));
 			break;
 		case Center:
-			addSequential(new AutonCommandCenter(targetPriority, switchPosition, scalePosition));
+			addSequential(new AutonCommandCenter(autoType, targetPriority, switchPosition, scalePosition));
 			break;
 		case Right:
-			addSequential(new AutonCommandRight(targetPriority, switchPosition, scalePosition));
+			addSequential(new AutonCommandRight(autoType, targetPriority, switchPosition, scalePosition));
 			break;
 		}
 

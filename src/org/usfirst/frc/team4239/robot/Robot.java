@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4239.robot;
 
+import org.usfirst.frc.team4239.robot.State.AutoType;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	private Command m_autonomousCommand;
+	private SendableChooser<AutoType> typeChooser = new SendableChooser<>();
 	private SendableChooser<StartingPosition> positionChooser = new SendableChooser<>();
 	private SendableChooser<TargetPriority> priorityChooser = new SendableChooser<>();
 
@@ -54,6 +56,10 @@ public class Robot extends TimedRobot {
 		cam1.setResolution(320, 240);
 		cam1.setFPS(10);
         
+		typeChooser.addDefault("Task Based", AutoType.TargetBased); 				  //Use when there is no chance of running into another team during autos
+		typeChooser.addObject("Robot Alignment Based", AutoType.RobotAlignmentBased); //Use when another team can handle the scale, switch, and both to minimize running into each other
+		SmartDashboard.putData("Auto Type", typeChooser);
+		
         positionChooser.addObject("Left", StartingPosition.Left);
         positionChooser.addObject("Center", StartingPosition.Center);
         positionChooser.addObject("Right", StartingPosition.Right);
@@ -85,6 +91,7 @@ public class Robot extends TimedRobot {
 		
 		drivetrain.setIsAuto(true);
 		
+		AutoType autoType = typeChooser.getSelected();
 		StartingPosition startingPosition = positionChooser.getSelected();
 		TargetPriority targetPriority = priorityChooser.getSelected();
 		
@@ -119,7 +126,7 @@ public class Robot extends TimedRobot {
 			}
 		}
 		
-		m_autonomousCommand = new AutonCommand(startingPosition, targetPriority, switchPosition, scalePosition);
+		m_autonomousCommand = new AutonCommand(autoType, startingPosition, targetPriority, switchPosition, scalePosition);
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}

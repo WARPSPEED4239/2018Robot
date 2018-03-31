@@ -1,6 +1,10 @@
 package org.usfirst.frc.team4239.robot;
 
 public class State {
+	public static enum AutoType {
+		RobotAlignmentBased, TargetBased
+	}
+	
 	public static enum StartingPosition {
 		Left, Center, Right
 	}
