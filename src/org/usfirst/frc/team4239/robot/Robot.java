@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	private Command m_autonomousCommand;
-	private SendableChooser<AutoType> typeChooser = new SendableChooser<>();
 	private SendableChooser<StartingPosition> positionChooser = new SendableChooser<>();
+	private SendableChooser<AutoType> typeChooser = new SendableChooser<>();
 	private SendableChooser<TargetPriority> priorityChooser = new SendableChooser<>();
 
 	@Override
@@ -93,8 +93,8 @@ public class Robot extends TimedRobot {
 		
 		drivetrain.setIsAuto(true);
 		
-		AutoType autoType = typeChooser.getSelected();
 		StartingPosition startingPosition = positionChooser.getSelected();
+		AutoType autoType = typeChooser.getSelected();
 		TargetPriority targetPriority = priorityChooser.getSelected();
 		
 		String gameData = FMSInterface.getGameData();
