@@ -38,6 +38,7 @@ public class AutonCommandRight extends CommandGroup {
 		boolean doSwitch = false;
 		boolean doOpSwitch = false;
 		boolean doScale = false;
+		boolean doScaleSpline = false;
 		boolean doOpScale = false;
 		boolean doScaleAndSwitch = false;
 
@@ -65,7 +66,7 @@ public class AutonCommandRight extends CommandGroup {
 		}
 		
 		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.RobotAlignmentBased) {
-			doScale = true;
+			doScaleSpline = true;
 		}
 		
 		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Left && autoType == AutoType.RobotAlignmentBased) {
@@ -102,6 +103,15 @@ public class AutonCommandRight extends CommandGroup {
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
 			addParallel(new LiftDownWithTimeout(3.0));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
+		}
+		
+		else if (doScaleSpline) {
+			addParallel(new DrivetrainFollowProfile(Trajectories.leftScaleSpline));
+			addSequential(new WaitCommand(3.0));
+			addSequential(new LiftUpWithTimeout(3.5));
+			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
+			addParallel(new LiftDownWithTimeout(3.0));
+			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 		}
 
 		else if (doOpScale) {
