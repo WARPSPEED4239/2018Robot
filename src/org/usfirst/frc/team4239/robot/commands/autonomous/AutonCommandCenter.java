@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
 import org.usfirst.frc.team4239.robot.State.AutoType;
+import org.usfirst.frc.team4239.robot.State.PossibleCollision;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
@@ -16,7 +17,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonCommandCenter extends CommandGroup {
 
-	public AutonCommandCenter(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
+	public AutonCommandCenter(AutoType autoType, TargetPriority targetPriority, PossibleCollision possibleCollision, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandCenter");
 		
 		if (targetPriority == TargetPriority.Drive) {

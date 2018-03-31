@@ -12,6 +12,10 @@ public class State {
 	public static enum TargetPriority {
 		Switch, Scale, Drive, DriveNoSensors, DoNothing, NA
 	}
+	
+	public static enum PossibleCollision {
+		Yes, No
+	}
 
 	public static enum ScalePosition {
 		Left, Right, Unknown

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands.autonomous;
 
 import org.usfirst.frc.team4239.robot.State.AutoType;
+import org.usfirst.frc.team4239.robot.State.PossibleCollision;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutonCommandRight extends CommandGroup {
 
-	public AutonCommandRight(AutoType autoType, TargetPriority targetPriority, SwitchPosition switchPosition, ScalePosition scalePosition) {
+	public AutonCommandRight(AutoType autoType, TargetPriority targetPriority, PossibleCollision possibleCollision, SwitchPosition switchPosition, ScalePosition scalePosition) {
 		Logger.log("AutonCommandRight");
 
 		if (targetPriority == TargetPriority.Drive) {
@@ -51,7 +52,12 @@ public class AutonCommandRight extends CommandGroup {
 			doOpScale = (targetPriority == TargetPriority.Scale);
 		}
 		
-		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.TargetBased) {
+		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.TargetBased && possibleCollision == PossibleCollision.No) {
+			doOpSwitch = (targetPriority == TargetPriority.Switch);
+			doScaleSpline = (targetPriority == TargetPriority.Scale);
+		}
+		
+		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Right && autoType == AutoType.TargetBased && possibleCollision == PossibleCollision.Yes) {
 			doOpSwitch = (targetPriority == TargetPriority.Switch);
 			doScale = (targetPriority == TargetPriority.Scale);
 		}
@@ -69,8 +75,8 @@ public class AutonCommandRight extends CommandGroup {
 			doScaleSpline = true;
 		}
 		
-		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Left && autoType == AutoType.RobotAlignmentBased) {
-			doOpScale = true; //CHANGE THIS IF OP SCALE IS GOING TO RUN INTO THERE AUTO TO: addSequential(new AutonCrossAutoLine());
+		else if (switchPosition == SwitchPosition.Left && scalePosition == ScalePosition.Left && autoType == AutoType.RobotAlignmentBased && possibleCollision == PossibleCollision.Yes) {
+			addSequential(new AutonCrossAutoLine());
 		}
 			
 		if (doSwitch) {

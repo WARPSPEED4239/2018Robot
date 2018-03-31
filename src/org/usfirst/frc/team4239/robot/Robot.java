@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4239.robot;
 
 import org.usfirst.frc.team4239.robot.State.AutoType;
+import org.usfirst.frc.team4239.robot.State.PossibleCollision;
 import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	private SendableChooser<StartingPosition> positionChooser = new SendableChooser<>();
 	private SendableChooser<AutoType> typeChooser = new SendableChooser<>();
 	private SendableChooser<TargetPriority> priorityChooser = new SendableChooser<>();
+	private SendableChooser<PossibleCollision> collisionChooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
@@ -74,6 +76,10 @@ public class Robot extends TimedRobot {
         priorityChooser.addObject("Do Nothing", TargetPriority.DoNothing);
         SmartDashboard.putData("Target Priority", priorityChooser);
         
+        collisionChooser.addDefault("No", PossibleCollision.No);
+        collisionChooser.addObject("Yes", PossibleCollision.Yes);
+        SmartDashboard.putData("Possible Collision", collisionChooser);
+        
         Trajectories.initialize();
 	}
 
@@ -96,6 +102,7 @@ public class Robot extends TimedRobot {
 		StartingPosition startingPosition = positionChooser.getSelected();
 		AutoType autoType = typeChooser.getSelected();
 		TargetPriority targetPriority = priorityChooser.getSelected();
+		PossibleCollision possibleCollision = collisionChooser.getSelected();
 		
 		String gameData = FMSInterface.getGameData();
 
@@ -128,7 +135,7 @@ public class Robot extends TimedRobot {
 			}
 		}
 		
-		m_autonomousCommand = new AutonCommand(autoType, startingPosition, targetPriority, switchPosition, scalePosition);
+		m_autonomousCommand = new AutonCommand(autoType, startingPosition, targetPriority, possibleCollision,switchPosition, scalePosition);
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
