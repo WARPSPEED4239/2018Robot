@@ -30,10 +30,6 @@ public class AutonCommand extends CommandGroup {
 		case Right:
 			addSequential(new AutonCommandRight(targetPriority, switchPosition, scalePosition));
 			break;
-		default:
-			// if position is unknown, try to cross auto line
-			addSequential(new AutonCrossAutoLine());
-			break;
 		}
 
 	}

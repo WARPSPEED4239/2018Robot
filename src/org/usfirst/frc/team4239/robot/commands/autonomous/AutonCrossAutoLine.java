@@ -10,7 +10,7 @@ public class AutonCrossAutoLine extends CommandGroup {
 
 	public AutonCrossAutoLine() {
 		Logger.log("AutonCrossAutoLine");
-		addSequential(new DrivetrainFollowProfile(Trajectories.crossAutoLine));
+		addSequential(new DrivetrainFollowProfile(Trajectories.driveForward8Ft));
 	}
 	
 }

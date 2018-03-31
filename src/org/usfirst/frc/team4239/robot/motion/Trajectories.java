@@ -11,7 +11,6 @@ public class Trajectories {
 	
 	public static void initialize() {
 		Logger.log("Trajectory initialization started.");
-		crossAutoLine = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 8.0);
 		centerToLeftSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
 				new Waypoint(9.0, 3.8, 0),
 				new Waypoint(0, 0, 0)
@@ -24,6 +23,7 @@ public class Trajectories {
 		driveForward1Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 1);
 		driveForward2Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 2);
 		driveForward3Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 3);
+		driveForward8Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 8);
 		driveForward12Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 12);
 		driveForward15Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 15);
 		driveForward18Ft = TrajectoryBuilder.getStraightLineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, 18);
@@ -41,14 +41,13 @@ public class Trajectories {
 		Logger.log("Trajecotry initialization complete.");
 	}
 	
-	public static TrajectoryResult crossAutoLine;
-	
 	public static TrajectoryResult centerToLeftSwitch;
 	public static TrajectoryResult centerToRightSwitch;
 	
 	public static TrajectoryResult driveForward1Ft;
 	public static TrajectoryResult driveForward2Ft;
 	public static TrajectoryResult driveForward3Ft;
+	public static TrajectoryResult driveForward8Ft;
 	public static TrajectoryResult driveForward12Ft;
 	public static TrajectoryResult driveForward15Ft;
 	public static TrajectoryResult driveForward18Ft;

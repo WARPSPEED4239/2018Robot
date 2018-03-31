@@ -9,6 +9,6 @@ public class AutonDriveForwardNoSensors extends CommandGroup {
 
     public AutonDriveForwardNoSensors() {
     	Logger.log("AutonDriveForwardNoSensors");
-        addParallel(new DrivetrainSetSpeed(-1.0, 0.0, 1));
+        addSequential(new DrivetrainSetSpeed(-1.0, 0.0, 1));
     }
 }
