@@ -83,7 +83,7 @@ public class AutonCommandLeft extends CommandGroup {
 		else if (doScale) {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
-			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight45Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight60Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));
 			addSequential(new WaitCommand(0.75));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
@@ -104,7 +104,7 @@ public class AutonCommandLeft extends CommandGroup {
 		else if (doScaleAndSwitch) {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
-			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight45Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight60Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));
 			addSequential(new WaitCommand(0.75));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
