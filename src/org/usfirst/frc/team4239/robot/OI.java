@@ -9,8 +9,6 @@ package org.usfirst.frc.team4239.robot;
 
 import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.ClimberReverse;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainCalculateTrackWidth;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
