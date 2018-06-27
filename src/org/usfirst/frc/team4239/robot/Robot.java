@@ -17,6 +17,7 @@ import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
 import org.usfirst.frc.team4239.robot.motion.Trajectories;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
 import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4239.robot.subsystems.DrivetrainShifting;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 import org.usfirst.frc.team4239.robot.tools.FMSInterface;
@@ -32,6 +33,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Drivetrain drivetrain;
+	public static DrivetrainShifting drivetrainShifting;
 	public static Intake intake;
 	public static Lift lift;
 	public static OI oi;
@@ -41,11 +43,12 @@ public class Robot extends TimedRobot {
 	private SendableChooser<AutoType> typeChooser = new SendableChooser<>();
 	private SendableChooser<TargetPriority> priorityChooser = new SendableChooser<>();
 	private SendableChooser<PossibleCollision> collisionChooser = new SendableChooser<>();
-
+	
 	@Override
 	public void robotInit() {
 		climber = new Climber();
 		drivetrain = new Drivetrain();
+		drivetrainShifting = new DrivetrainShifting();
 		intake = new Intake();
 		lift = new Lift();
 		oi = new OI();
@@ -58,16 +61,16 @@ public class Robot extends TimedRobot {
 		cam1.setResolution(320, 240);
 		cam1.setFPS(10);
 		
-        positionChooser.addObject("Left", StartingPosition.Left);
-        positionChooser.addObject("Center", StartingPosition.Center);
-        positionChooser.addObject("Right", StartingPosition.Right);
-        SmartDashboard.putData("Starting Position", positionChooser);
-        
     	typeChooser.addDefault("N/A", AutoType.NA);
 		typeChooser.addObject("Task Based", AutoType.TargetBased); 				  //Use when there is no chance of running into another team during autos
 		typeChooser.addObject("Robot Alignment Based", AutoType.RobotAlignmentBased); //Use when another team can handle the scale, switch, and both to minimize running into each other
 		SmartDashboard.putData("Auto Type", typeChooser);
-        
+
+		positionChooser.addObject("Left", StartingPosition.Left);
+        positionChooser.addObject("Center", StartingPosition.Center);
+        positionChooser.addObject("Right", StartingPosition.Right);
+        SmartDashboard.putData("Starting Position", positionChooser);
+		
         priorityChooser.addDefault("N/A", TargetPriority.NA);
         priorityChooser.addObject("Switch", TargetPriority.Switch);
         priorityChooser.addObject("Scale", TargetPriority.Scale);

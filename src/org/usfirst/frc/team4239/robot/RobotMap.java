@@ -36,9 +36,7 @@ public class RobotMap {
 	
 	public static int
 		drivetrainSolenoidLowGear = 0,
-		drivetrainSolenoidHighGear = 1,
-		intakePivotSolenoidDown = 2,
-		intakePivotSolenoidUp = 3;
+		drivetrainSolenoidHighGear = 1;
 	
 	public static int
 		liftBottomSwitch = 0,

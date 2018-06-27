@@ -21,7 +21,7 @@ public class AutonCommand extends CommandGroup {
 		Logger.log("StartingPosition: " + startingPosition.name());
 		Logger.log("TargetPriority: " + targetPriority.name());
 		Logger.log("SwitchPosition: " + switchPosition.name());
-		Logger.log("Scale Position: " + scalePosition.name());
+		Logger.log("ScalePosition: " + scalePosition.name());
 		
 		switch (startingPosition) {
 		case Left:

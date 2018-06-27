@@ -27,7 +27,7 @@ public class Trajectories {
 		});
 		
 		rightScaleSpline = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint [] {
-				new Waypoint(22.0, -3.0, 0),
+				new Waypoint(22.0, 3.0, 0),
 				new Waypoint(0, 0, 0)
 		});
 		

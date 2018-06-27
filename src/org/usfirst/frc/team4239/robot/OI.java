@@ -11,6 +11,8 @@ import org.usfirst.frc.team4239.robot.commands.ClimberClimb;
 import org.usfirst.frc.team4239.robot.commands.ClimberReverse;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainArcadeDrive;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainCalculateTrackWidth;
+import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
+import org.usfirst.frc.team4239.robot.commands.DrivetrainLowGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeIn;
 import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
@@ -55,9 +57,12 @@ public class OI {
 		jButton9 = new JoystickButton(joystick, 9);
 		jButton10 = new JoystickButton(joystick, 10);
 	
-		xButtonX.whenPressed(new DrivetrainArcadeDrive());
+		xButtonB.whenPressed(new DrivetrainHighGear());
+		xButtonA.whenPressed(new DrivetrainLowGear());
+		
+		/*xButtonX.whenPressed(new DrivetrainArcadeDrive());
 		xButtonA.whenPressed(new DrivetrainCalculateTrackWidth(-90));
-		xButtonB.whenPressed(new DrivetrainCalculateTrackWidth(90));
+		xButtonB.whenPressed(new DrivetrainCalculateTrackWidth(90));*/
 	
 		jButton1.whileHeld(new IntakeOut());
 		jButton2.whileHeld(new IntakeIn());
