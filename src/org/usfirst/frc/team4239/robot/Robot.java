@@ -62,12 +62,12 @@ public class Robot extends TimedRobot {
 		cam1.setFPS(10);
 		
     	typeChooser.addDefault("N/A", AutoType.NA);
-		typeChooser.addObject("Task Based", AutoType.TargetBased); 				  //Use when there is no chance of running into another team during autos
+		typeChooser.addObject("Task Based", AutoType.TargetBased); 				  	  //Use when there is no chance of running into another team during autos
 		typeChooser.addObject("Robot Alignment Based", AutoType.RobotAlignmentBased); //Use when another team can handle the scale, switch, and both to minimize running into each other
 		SmartDashboard.putData("Auto Type", typeChooser);
 
 		positionChooser.addObject("Left", StartingPosition.Left);
-        positionChooser.addObject("Center", StartingPosition.Center);
+        positionChooser.addDefault("Center", StartingPosition.Center);
         positionChooser.addObject("Right", StartingPosition.Right);
         SmartDashboard.putData("Starting Position", positionChooser);
 		
