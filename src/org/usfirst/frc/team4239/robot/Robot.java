@@ -20,6 +20,7 @@ import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.DrivetrainShifting;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
+import org.usfirst.frc.team4239.robot.subsystems.RGB;
 import org.usfirst.frc.team4239.robot.tools.FMSInterface;
 
 import edu.wpi.cscore.UsbCamera;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
 	public static DrivetrainShifting drivetrainShifting;
 	public static Intake intake;
 	public static Lift lift;
+	public static RGB rgb;
 	public static OI oi;
 
 	private Command m_autonomousCommand;
@@ -51,8 +53,11 @@ public class Robot extends TimedRobot {
 		drivetrainShifting = new DrivetrainShifting();
 		intake = new Intake();
 		lift = new Lift();
+		rgb = new RGB();
 		oi = new OI();
-
+		
+		Robot.rgb.rgbRedDim();
+		
 		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(320, 240);
 		cam0.setFPS(10);
@@ -84,6 +89,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Possible Collision", collisionChooser);
         
         Trajectories.initialize();
+        
+        Robot.rgb.rgbGreen();
 	}
 
 	@Override
