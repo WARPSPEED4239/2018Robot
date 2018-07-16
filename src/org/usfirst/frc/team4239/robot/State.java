@@ -1,12 +1,20 @@
 package org.usfirst.frc.team4239.robot;
 
 public class State {
+	public static enum AutoType {
+		RobotAlignmentBased, TargetBased, NA
+	}
+	
 	public static enum StartingPosition {
-		Left, Center, Right, Unknown
+		Left, Center, Right
 	}
 
 	public static enum TargetPriority {
-		Switch, Scale, Drive, DriveNoSensors, DoNothing, Unknown
+		Switch, Scale, Drive, DriveNoSensors, DoNothing, NA
+	}
+	
+	public static enum PossibleCollision {
+		Yes, No
 	}
 
 	public static enum ScalePosition {
