@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DrivetrainLowGear extends Command {
+public class RGBBlue extends Command {
 
-    public DrivetrainLowGear() {
-        requires(Robot.drivetrainShifting);
+    public RGBBlue() {
+        requires(Robot.rgb);
     }
 
     protected void initialize() {
-    	Robot.drivetrainShifting.drivetrainLowGear();
     }
 
     protected void execute() {
+    	Robot.rgb.rgbBlue();
     }
 
     protected boolean isFinished() {

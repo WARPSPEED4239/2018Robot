@@ -32,15 +32,21 @@ public class RGB extends Subsystem {
     }
     
     public void rgbWhite() {
-    	rgbCanifer.setLEDOutput(0.5, LEDChannel.LEDChannelA);
-    	rgbCanifer.setLEDOutput(0.5, LEDChannel.LEDChannelB);
-    	rgbCanifer.setLEDOutput(0.5, LEDChannel.LEDChannelC);
+    	rgbCanifer.setLEDOutput(0.3, LEDChannel.LEDChannelA);
+    	rgbCanifer.setLEDOutput(0.3, LEDChannel.LEDChannelB);
+    	rgbCanifer.setLEDOutput(0.3, LEDChannel.LEDChannelC);
     }
     
     public void rgbGreen() {
     	rgbCanifer.setLEDOutput(0.0, LEDChannel.LEDChannelA);
-    	rgbCanifer.setLEDOutput(1.0, LEDChannel.LEDChannelB);
+    	rgbCanifer.setLEDOutput(0.3, LEDChannel.LEDChannelB);
     	rgbCanifer.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+    }
+    
+    public void rgbBlue() {
+    	rgbCanifer.setLEDOutput(0.0, LEDChannel.LEDChannelA);
+    	rgbCanifer.setLEDOutput(0.0, LEDChannel.LEDChannelB);
+    	rgbCanifer.setLEDOutput(0.5, LEDChannel.LEDChannelC);
     }
     
     public void rgbPurple() {

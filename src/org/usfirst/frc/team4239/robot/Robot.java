@@ -13,6 +13,7 @@ import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
+import org.usfirst.frc.team4239.robot.commands.RGBRedFlashingSlow;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
 import org.usfirst.frc.team4239.robot.motion.Trajectories;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
@@ -56,7 +57,10 @@ public class Robot extends TimedRobot {
 		rgb = new RGB();
 		oi = new OI();
 		
-		Robot.rgb.rgbRedDim();
+		//Robot.rgb.rgbRedDim();
+		
+		RGBRedFlashingSlow rgbRedFlashingSlow = new RGBRedFlashingSlow();
+		rgbRedFlashingSlow.start();
 		
 		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(320, 240);
