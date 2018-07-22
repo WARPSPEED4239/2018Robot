@@ -25,6 +25,7 @@ public class RGBWhite extends Command {
     }
 
     protected void end() {
+    	Robot.rgbController.setColor(Color.Red);
     }
 
     protected void interrupted() {
