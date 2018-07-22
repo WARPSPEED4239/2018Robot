@@ -1,23 +1,24 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RGBRedDim extends Command {
+public class RGBPurpleFlashing extends Command {
 
-    public RGBRedDim() {
-        requires(Robot.rgb);
+    public RGBPurpleFlashing() {
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.rgb.rgbRedDim();
+    	Color[] colors = {Color.PurpleDim, Color.Black};
+    	Robot.rgbController.setColors(colors, 0.5);
     }
 
     protected boolean isFinished() {

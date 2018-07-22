@@ -16,11 +16,11 @@ import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
 import org.usfirst.frc.team4239.robot.commands.RGBGreen;
-import org.usfirst.frc.team4239.robot.commands.RGBPrupleFlashingSlow;
 import org.usfirst.frc.team4239.robot.commands.RGBPurple;
+import org.usfirst.frc.team4239.robot.commands.RGBPurpleFlashing;
 import org.usfirst.frc.team4239.robot.commands.RGBRed;
+import org.usfirst.frc.team4239.robot.commands.RGBRedFlashing;
 import org.usfirst.frc.team4239.robot.commands.RGBRedFlashingFast;
-import org.usfirst.frc.team4239.robot.commands.RGBRedFlashingSlow;
 import org.usfirst.frc.team4239.robot.commands.RGBWhite;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -70,16 +70,16 @@ public class OI {
 		/*xButtonX.whenPressed(new DrivetrainArcadeDrive());
 		xButtonA.whenPressed(new DrivetrainCalculateTrackWidth(-90));
 		xButtonB.whenPressed(new DrivetrainCalculateTrackWidth(90));*/
-	
-		jButton1.whileHeld(new IntakeOut());
+		
+    	jButton1.whileHeld(new IntakeOut());
 		jButton1.whileHeld(new RGBPurple());
 		jButton2.whileHeld(new IntakeIn());
-		jButton2.whileHeld(new RGBPrupleFlashingSlow());
+		jButton2.whileHeld(new RGBPurpleFlashing());
 		jButton8.whileHeld(new ClimberClimb());
 		jButton8.whileHeld(new RGBGreen());
 		jbutton7.whileHeld(new ClimberReverse());
 		jButton9.whileHeld(new LiftDown());
-		jButton9.whileHeld(new RGBRedFlashingSlow());
+		jButton9.whileHeld(new RGBRedFlashing());
 		jButton10.whileHeld(new LiftUp());
 		jButton10.whileHeld(new RGBWhite());
 	}

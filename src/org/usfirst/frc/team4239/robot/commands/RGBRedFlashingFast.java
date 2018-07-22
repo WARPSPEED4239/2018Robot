@@ -1,19 +1,33 @@
 package org.usfirst.frc.team4239.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RGBRedFlashingFast extends CommandGroup {
+public class RGBRedFlashingFast extends Command {
 
-	private int counter = 0;
+    public RGBRedFlashingFast() {
+    }
 
-	public RGBRedFlashingFast() {
-		while (counter < 999) {
-			addSequential(new RGBBlack(), 0.05);
-			addSequential(new RGBRed(), 0.05);
-			counter = counter + 1;
-		}
-	}
+    protected void initialize() {
+    }
+
+    protected void execute() {
+    	Color[] colors = {Color.Red, Color.Black};
+    	Robot.rgbController.setColors(colors, 0.2);
+    }
+
+    protected boolean isFinished() {
+        return false;
+    }
+
+    protected void end() {
+    }
+
+    protected void interrupted() {
+    }
 }

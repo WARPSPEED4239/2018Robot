@@ -13,7 +13,6 @@ import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
-import org.usfirst.frc.team4239.robot.commands.RGBRedFlashingSlow;
 import org.usfirst.frc.team4239.robot.commands.autonomous.AutonCommand;
 import org.usfirst.frc.team4239.robot.motion.Trajectories;
 import org.usfirst.frc.team4239.robot.subsystems.Climber;
@@ -21,8 +20,11 @@ import org.usfirst.frc.team4239.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4239.robot.subsystems.DrivetrainShifting;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
-import org.usfirst.frc.team4239.robot.subsystems.RGB;
 import org.usfirst.frc.team4239.robot.tools.FMSInterface;
+import org.usfirst.frc.team4239.robot.tools.RGBController;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
+
+import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -38,7 +40,7 @@ public class Robot extends TimedRobot {
 	public static DrivetrainShifting drivetrainShifting;
 	public static Intake intake;
 	public static Lift lift;
-	public static RGB rgb;
+	public static RGBController rgbController;
 	public static OI oi;
 
 	private Command m_autonomousCommand;
@@ -54,13 +56,12 @@ public class Robot extends TimedRobot {
 		drivetrainShifting = new DrivetrainShifting();
 		intake = new Intake();
 		lift = new Lift();
-		rgb = new RGB();
+		rgbController = new RGBController(new CANifier(RobotMap.rgbCanifier));
 		oi = new OI();
 		
-		//Robot.rgb.rgbRedDim();
+		Color[] colors = {Color.RedDim, Color.Black};
+		rgbController.setColors(colors, 1.5);
 		
-		RGBRedFlashingSlow rgbRedFlashingSlow = new RGBRedFlashingSlow();
-		rgbRedFlashingSlow.start();
 		
 		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(320, 240);
@@ -93,8 +94,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Possible Collision", collisionChooser);
         
         Trajectories.initialize();
-        
-        Robot.rgb.rgbGreen();
+
+        rgbController.setColor(Color.GreenDim);
 	}
 
 	@Override
@@ -153,6 +154,9 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
+		
+		Color[] colors = {Color.Red, Color.Blue};
+		Robot.rgbController.setColors(colors, 0.25);
 	}
 
 	@Override
@@ -165,6 +169,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
+		Robot.rgbController.setColor(Color.Red);
 	}
 
 	@Override
