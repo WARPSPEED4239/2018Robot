@@ -21,10 +21,6 @@ import org.usfirst.frc.team4239.robot.subsystems.DrivetrainShifting;
 import org.usfirst.frc.team4239.robot.subsystems.Intake;
 import org.usfirst.frc.team4239.robot.subsystems.Lift;
 import org.usfirst.frc.team4239.robot.tools.FMSInterface;
-import org.usfirst.frc.team4239.robot.tools.RGBController;
-import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
-
-import com.ctre.phoenix.CANifier;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -40,7 +36,7 @@ public class Robot extends TimedRobot {
 	public static DrivetrainShifting drivetrainShifting;
 	public static Intake intake;
 	public static Lift lift;
-	public static RGBController rgbController;
+	//public static RGBController rgbController;
 	public static OI oi;
 
 	private Command m_autonomousCommand;
@@ -56,11 +52,11 @@ public class Robot extends TimedRobot {
 		drivetrainShifting = new DrivetrainShifting();
 		intake = new Intake();
 		lift = new Lift();
-		rgbController = new RGBController(new CANifier(RobotMap.rgbCanifier));
+		//rgbController = new RGBController(new CANifier(RobotMap.rgbCanifier));
 		oi = new OI();
 		
-		Color[] colors = {Color.RedDim, Color.Black};
-		rgbController.setColors(colors, 1.5);
+		//Color[] colors = {Color.RedDim, Color.Black};
+		//rgbController.setColors(colors, 1.5);
 		
 		
 		UsbCamera cam0 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -91,11 +87,11 @@ public class Robot extends TimedRobot {
         
         collisionChooser.addDefault("No", PossibleCollision.No);
         collisionChooser.addObject("Yes", PossibleCollision.Yes);
-        SmartDashboard.putData("Possible Collision", collisionChooser);
+        SmartDashboard.putData("Possible Collision", collisionChooser);               //Only used in robot alignment auto type
         
         Trajectories.initialize();
 
-        rgbController.setColor(Color.GreenDim);
+        //rgbController.setColor(Color.GreenDim);
 	}
 
 	@Override
@@ -155,8 +151,8 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 		
-		Color[] colors = {Color.Red, Color.Blue};
-		Robot.rgbController.setColors(colors, 0.25);
+		//Color[] colors = {Color.Red, Color.Blue};
+		//Robot.rgbController.setColors(colors, 0.25);
 	}
 
 	@Override
@@ -170,7 +166,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		
-		Robot.rgbController.setColor(Color.Red);
+		//Robot.rgbController.setColor(Color.Red);
 	}
 
 	@Override

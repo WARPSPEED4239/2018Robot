@@ -6,7 +6,6 @@ import org.usfirst.frc.team4239.robot.State.ScalePosition;
 import org.usfirst.frc.team4239.robot.State.StartingPosition;
 import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
-import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.tools.Logger;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -36,7 +35,6 @@ public class AutonCommand extends CommandGroup {
 			break;
 		default:
 			// If the position of the robot is not set on the sendable chooser, drive to auto line
-			addParallel(new DrivetrainHighGear());
 			addSequential(new AutonCrossAutoLine());
 			break;
 		}

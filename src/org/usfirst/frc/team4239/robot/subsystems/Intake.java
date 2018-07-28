@@ -15,7 +15,6 @@ public class Intake extends Subsystem {
     private Spark intakeRight = new Spark (RobotMap.intakeMotorRight);
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         setDefaultCommand(new IntakeStop());
     }
     
