@@ -7,6 +7,7 @@ import org.usfirst.frc.team4239.robot.State.SwitchPosition;
 import org.usfirst.frc.team4239.robot.State.TargetPriority;
 import org.usfirst.frc.team4239.robot.commands.AutonIntakeOutWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.DrivetrainFollowProfile;
+import org.usfirst.frc.team4239.robot.commands.DrivetrainHighGear;
 import org.usfirst.frc.team4239.robot.commands.IntakeInWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.LiftDownWithTimeout;
 import org.usfirst.frc.team4239.robot.commands.LiftUpWithTimeout;
@@ -36,6 +37,7 @@ public class AutonCommandCenter extends CommandGroup {
 
 		switch (switchPosition) {
 		case Left:
+			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToLeftSwitch));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
@@ -51,6 +53,7 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 			break;
 		case Right:
+			addParallel(new DrivetrainHighGear());
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
@@ -66,6 +69,7 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 			break;
 		default:
+			addParallel(new DrivetrainHighGear());
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch));
 			break;
 		}

@@ -14,10 +14,10 @@ public class DrivetrainHighGear extends Command {
     }
 
     protected void initialize() {
+    	Robot.drivetrainShifting.drivetrainHighGear();
     }
 
     protected void execute() {
-    	Robot.drivetrainShifting.drivetrainHighGear();
     }
 
     protected boolean isFinished() {

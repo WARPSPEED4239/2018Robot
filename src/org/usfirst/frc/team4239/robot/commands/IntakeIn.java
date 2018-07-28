@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,6 +22,8 @@ public class IntakeIn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.intake.intakeIn();
+    	Color[] colors = {Color.PurpleDim, Color.Black};
+    	Robot.rgbController.setColors(colors, 0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()

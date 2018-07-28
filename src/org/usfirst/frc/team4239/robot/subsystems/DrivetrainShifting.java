@@ -13,17 +13,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DrivetrainShifting extends Subsystem {
 
-   private DoubleSolenoid shiftingSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear, RobotMap.drivetrainSolenoidLowGear);
+	private DoubleSolenoid shiftingSolenoid = new DoubleSolenoid(RobotMap.drivetrainSolenoidHighGear,RobotMap.drivetrainSolenoidLowGear);
 
-    public void initDefaultCommand() {
-        setDefaultCommand(new DrivetrainHighGear());
-    }
-    
-    public void drivetrainHighGear() {
-    	Robot.drivetrainShifting.shiftingSolenoid.set(Value.kForward);
-    }
-    
-    public void drivetrainLowGear() {
-    	Robot.drivetrainShifting.shiftingSolenoid.set(Value.kReverse);
-    }
+	public void initDefaultCommand() {
+		setDefaultCommand(new DrivetrainHighGear());
+	}
+
+	public void drivetrainHighGear() {
+		Robot.drivetrainShifting.shiftingSolenoid.set(Value.kForward);
+	}
+
+	public void drivetrainLowGear() {
+		Robot.drivetrainShifting.shiftingSolenoid.set(Value.kReverse);
+	}
 }

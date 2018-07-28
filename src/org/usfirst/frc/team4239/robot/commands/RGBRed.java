@@ -1,24 +1,23 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DrivetrainLowGear extends Command {
+public class RGBRed extends Command {
 
-    public DrivetrainLowGear() {
-        requires(Robot.drivetrainShifting);
+    public RGBRed() {
     }
 
     protected void initialize() {
-    	Robot.drivetrainShifting.drivetrainLowGear();
     }
 
     protected void execute() {
-
+    	Robot.rgbController.setColor(Color.Red);
     }
 
     protected boolean isFinished() {
@@ -26,6 +25,7 @@ public class DrivetrainLowGear extends Command {
     }
 
     protected void end() {
+    	Robot.rgbController.setColor(Color.Red);
     }
 
     protected void interrupted() {

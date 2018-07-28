@@ -15,6 +15,13 @@ import org.usfirst.frc.team4239.robot.commands.IntakeIn;
 import org.usfirst.frc.team4239.robot.commands.IntakeOut;
 import org.usfirst.frc.team4239.robot.commands.LiftDown;
 import org.usfirst.frc.team4239.robot.commands.LiftUp;
+import org.usfirst.frc.team4239.robot.commands.RGBGreen;
+import org.usfirst.frc.team4239.robot.commands.RGBPurple;
+import org.usfirst.frc.team4239.robot.commands.RGBPurpleFlashing;
+import org.usfirst.frc.team4239.robot.commands.RGBRed;
+import org.usfirst.frc.team4239.robot.commands.RGBRedFlashing;
+import org.usfirst.frc.team4239.robot.commands.RGBRedFlashingFast;
+import org.usfirst.frc.team4239.robot.commands.RGBWhite;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -56,18 +63,25 @@ public class OI {
 		jButton10 = new JoystickButton(joystick, 10);
 	
 		xButtonB.whenPressed(new DrivetrainHighGear());
+		xButtonB.whenPressed(new RGBRed());
 		xButtonA.whenPressed(new DrivetrainLowGear());
+		xButtonA.whenPressed(new RGBRedFlashingFast());
 		
 		/*xButtonX.whenPressed(new DrivetrainArcadeDrive());
 		xButtonA.whenPressed(new DrivetrainCalculateTrackWidth(-90));
 		xButtonB.whenPressed(new DrivetrainCalculateTrackWidth(90));*/
-	
-		jButton1.whileHeld(new IntakeOut());
+		
+    	jButton1.whileHeld(new IntakeOut());
+		jButton1.whileHeld(new RGBPurple());
 		jButton2.whileHeld(new IntakeIn());
+		jButton2.whileHeld(new RGBPurpleFlashing());
 		jButton8.whileHeld(new ClimberClimb());
+		jButton8.whileHeld(new RGBGreen());
 		jbutton7.whileHeld(new ClimberReverse());
 		jButton9.whileHeld(new LiftDown());
+		jButton9.whileHeld(new RGBRedFlashing());
 		jButton10.whileHeld(new LiftUp());
+		jButton10.whileHeld(new RGBWhite());
 	}
 
 	public XboxController getController() {
