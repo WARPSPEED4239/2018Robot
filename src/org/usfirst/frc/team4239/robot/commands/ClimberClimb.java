@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4239.robot.commands;
 
 import org.usfirst.frc.team4239.robot.Robot;
+import org.usfirst.frc.team4239.robot.tools.RGBController.Color;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,6 +15,7 @@ public class ClimberClimb extends Command {
     }
 
     protected void initialize() {
+    	Robot.rgbController.setColor(Color.Green);
     }
 
     protected void execute() {
@@ -26,6 +28,7 @@ public class ClimberClimb extends Command {
 
     protected void end() {
     	Robot.climber.climberStop();
+    	Robot.rgbController.setColor(Color.Red);
     }
 
     protected void interrupted() {
