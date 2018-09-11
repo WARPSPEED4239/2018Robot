@@ -7,6 +7,9 @@ import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.CANifier.LEDChannel;
 
 public class RGBController {
+
+	private static boolean timerOn = false;
+
 	public enum Color {
 		Red, Black, White, Green, Blue, Purple, RedDim, GreenDim, PurpleDim
 	}
@@ -42,13 +45,19 @@ public class RGBController {
 		mTimer = new Timer();
 	}
 
-	public void setColors(Color[] colors, double cycleTime) {
-	    mTimer.cancel();
-	        mTimer.schedule(new ColorTask(colors, this), 0, (long) cycleTime * 1000);
-	    }
+	public synchronized void setColors(Color[] colors, double cycleTime) {
+		if (timerOn) {
+			mTimer.cancel();
+		}
+		timerOn = true;
+		mTimer.schedule(new ColorTask(colors, this), 0, (long) cycleTime * 1000);
+	}
 
-	public void setColor(Color color) {
-		mTimer.cancel();
+	public synchronized void setColor(Color color) {
+		if (timerOn) {
+			mTimer.cancel();
+		}
+		timerOn = false;
 		setColorImpl(color);
 	}
 

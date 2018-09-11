@@ -11,6 +11,9 @@ public class Trajectories {
 	
 	public static void initialize() {
 		Logger.log("Trajectory initialization started.");
+		
+		boolean invert = true;
+		
 		centerLeftSwitch1 = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
 				new Waypoint(9.0, 3.8, 0.0),
 				new Waypoint(0, 0, 0)
