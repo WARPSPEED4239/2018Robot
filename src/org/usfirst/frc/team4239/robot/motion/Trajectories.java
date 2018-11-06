@@ -17,7 +17,7 @@ public class Trajectories {
 		});
 		
 		centerToRightSwitch = TrajectoryBuilder.getSplineTrajectory(kDefaultMaxVelocity, kDefaultMaxAcceleration, kDefaultMaxJerk, new Waypoint[] {
-			new Waypoint(8.5, -4.0, 0),
+			new Waypoint(8.5, -3.5, 0),
 			new Waypoint(0, 0, 0)
 		});
 		

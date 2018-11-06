@@ -44,7 +44,8 @@ public class AutonCommandRight extends CommandGroup {
 		boolean doScaleAndSwitch = false;
 
 		if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Right) {
-			doScaleAndSwitch = true;
+			doSwitch = (targetPriority == TargetPriority.Switch);
+			doScale = (targetPriority == TargetPriority.Scale);
 		}
 		
 		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.TargetBased) {
