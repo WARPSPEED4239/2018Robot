@@ -38,14 +38,14 @@ public class AutonCommandCenter extends CommandGroup {
 		case Left:
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToLeftSwitch));
-			addSequential(new AutonIntakeOutWithTimeout(0.5));
+			addParallel(new AutonIntakeOutWithTimeout(0.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 			addParallel(new LiftDownWithTimeout(0.75));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
-			addParallel(new IntakeInWithTimeout(2.0));
+			addParallel(new IntakeInWithTimeout(2.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
-			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
+			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
@@ -53,14 +53,14 @@ public class AutonCommandCenter extends CommandGroup {
 		case Right:
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.centerToRightSwitch));
-			addSequential(new AutonIntakeOutWithTimeout(0.5));
+			addParallel(new AutonIntakeOutWithTimeout(0.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 			addParallel(new LiftDownWithTimeout(0.75));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
-			addParallel(new IntakeInWithTimeout(2.0));
+			addParallel(new IntakeInWithTimeout(2.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
-			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
+			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));

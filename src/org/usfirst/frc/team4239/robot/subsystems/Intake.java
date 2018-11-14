@@ -35,8 +35,8 @@ public class Intake extends Subsystem {
     }
     
     public void autonIntakeOut() {
-    	intakeLeft.set(0.3);
-    	intakeRight.set(0.3);
+    	intakeLeft.set(0.6);
+    	intakeRight.set(0.6);
     }
     
     public void autonIntakeOutScale() {

@@ -11,7 +11,7 @@ public class DrivetrainCalculateTrackWidth extends CommandGroup {
     	double maxVelocity = Trajectories.kDefaultMaxVelocity;
     	double maxAcceleration = Trajectories.kDefaultMaxAcceleration;
     	double maxJerk = Trajectories.kDefaultMaxJerk;
-    	addSequential(new DrivetrainFollowProfile(TrajectoryBuilder.getRotationTrajectory(maxVelocity, maxAcceleration, maxJerk, targetAngle)));
+    	addSequential(new DrivetrainFollowProfile(TrajectoryBuilder.getRotationTrajectory("calculateTrackWidth", maxVelocity, maxAcceleration, maxJerk, targetAngle)));
     }
     
 }
