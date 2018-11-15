@@ -27,8 +27,8 @@ public class LiftUpWithTimeout extends Command {
 	}
 
 	protected void end() {
-		Robot.lift.liftStop();
 		Robot.rgbController.setColor(Color.Red);
+		Robot.lift.liftStop();
 	}
 
 	protected void interrupted() {

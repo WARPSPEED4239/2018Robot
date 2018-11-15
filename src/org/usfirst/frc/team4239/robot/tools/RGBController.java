@@ -11,7 +11,7 @@ public class RGBController {
 	private static boolean timerOn = false;
 
 	public enum Color {
-		Red, Black, White, Green, Blue, Purple, RedDim, GreenDim, PurpleDim
+		Red, Black, White, Green, Blue, Purple, RedDim, WhiteDim, GreenDim, PurpleDim
 	}
 
 	private CANifier mRGB;
@@ -42,7 +42,6 @@ public class RGBController {
 
 	public RGBController(CANifier rgb) {
 		mRGB = rgb;
-		mTimer = new Timer();
 	}
 
 	public synchronized void setColors(Color[] colors, double cycleTime) {
@@ -50,6 +49,7 @@ public class RGBController {
             mTimer.cancel();
         }
         timerOn = true;
+        mTimer = new Timer();
         mTimer.schedule(new ColorTask(colors, this), 0, (long) (cycleTime * 1000));
     }
 
@@ -97,6 +97,11 @@ public class RGBController {
 			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelA);
 			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
 			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			break;
+		case WhiteDim:
+			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelA);
+			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelB);
+			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelC);
 			break;
 		case GreenDim:
 			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelA);

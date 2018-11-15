@@ -15,7 +15,7 @@ public class LiftDownWithTimeout extends Command {
 
 	protected void initialize() {
 		setTimeout(mTimeout);
-		Color[] colors = {Color.Red, Color.Black};
+		Color[] colors = {Color.WhiteDim, Color.Black};
     	Robot.rgbController.setColors(colors, 0.5);
 	}
 
@@ -28,8 +28,8 @@ public class LiftDownWithTimeout extends Command {
 	}
 
 	protected void end() {
-		Robot.lift.liftStop();
 		Robot.rgbController.setColor(Color.Red);
+		Robot.lift.liftStop();
 	}
 
 	protected void interrupted() {

@@ -17,7 +17,7 @@ public class DrivetrainLowGear extends Command {
     protected void initialize() {
     	Robot.drivetrainShifting.drivetrainLowGear();
     	Color[] colors = {Color.Red, Color.Black};
-    	Robot.rgbController.setColors(colors, 0.2);
+    	Robot.rgbController.setColors(colors, 0.1);
     }
 
     protected void execute() {
@@ -28,6 +28,7 @@ public class DrivetrainLowGear extends Command {
     }
 
     protected void end() {
+    	Robot.rgbController.setColor(Color.Red);
     }
 
     protected void interrupted() {

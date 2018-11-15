@@ -27,8 +27,8 @@ public class ClimberClimb extends Command {
     }
 
     protected void end() {
-    	Robot.climber.climberStop();
     	Robot.rgbController.setColor(Color.Red);
+    	Robot.climber.climberStop();
     }
 
     protected void interrupted() {

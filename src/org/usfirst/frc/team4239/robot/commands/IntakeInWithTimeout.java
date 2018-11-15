@@ -28,8 +28,8 @@ public class IntakeInWithTimeout extends Command {
 	}
 
 	protected void end() {
-		Robot.intake.intakeStop();
 		Robot.rgbController.setColor(Color.Red);
+		Robot.intake.intakeStop();
 	}
 
 	protected void interrupted() {
