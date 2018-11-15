@@ -46,12 +46,12 @@ public class RGBController {
 	}
 
 	public synchronized void setColors(Color[] colors, double cycleTime) {
-		if (timerOn) {
-			mTimer.cancel();
-		}
-		timerOn = true;
-		mTimer.schedule(new ColorTask(colors, this), 0, (long) cycleTime * 1000);
-	}
+        if (timerOn) {
+            mTimer.cancel();
+        }
+        timerOn = true;
+        mTimer.schedule(new ColorTask(colors, this), 0, (long) (cycleTime * 1000));
+    }
 
 	public synchronized void setColor(Color color) {
 		if (timerOn) {

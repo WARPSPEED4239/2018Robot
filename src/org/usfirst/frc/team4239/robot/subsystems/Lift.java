@@ -19,7 +19,6 @@ public class Lift extends Subsystem {
     private DigitalInput liftBottomSwitch = new DigitalInput(RobotMap.liftBottomSwitch);
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         setDefaultCommand(new LiftStop());
     }
     
