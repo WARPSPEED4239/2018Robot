@@ -6,7 +6,7 @@ import jaci.pathfinder.Waypoint;
 
 public class Trajectories {
 	public static final double kDefaultMaxVelocity = 8;
-	public static final double kDefaultMaxAcceleration = 4;
+	public static final double kDefaultMaxAcceleration = 4.5;
 	public static final double kDefaultMaxJerk = 40;
 	
 	public static void initialize() {
