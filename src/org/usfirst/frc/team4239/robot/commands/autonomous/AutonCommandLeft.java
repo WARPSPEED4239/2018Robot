@@ -56,6 +56,7 @@ public class AutonCommandLeft extends CommandGroup {
 		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.TargetBased && possibleCollision == PossibleCollision.No) {
 			doOpSwitch = (targetPriority == TargetPriority.Switch);
 			doScaleSpline = (targetPriority == TargetPriority.Scale);
+			doScale = (targetPriority == TargetPriority.Scale);
 		}
 		
 		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.TargetBased && possibleCollision == PossibleCollision.Yes) {
@@ -74,6 +75,7 @@ public class AutonCommandLeft extends CommandGroup {
 		
 		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Left && autoType == AutoType.RobotAlignmentBased) {
 			doScaleSpline = true;
+			doScale = true;
 		} 
 		
 		else if (switchPosition == SwitchPosition.Right && scalePosition == ScalePosition.Right && autoType == AutoType.RobotAlignmentBased && possibleCollision == PossibleCollision.No) {
@@ -88,6 +90,7 @@ public class AutonCommandLeft extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward12Ft));
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
@@ -98,15 +101,16 @@ public class AutonCommandLeft extends CommandGroup {
 		else if (doOpSwitch) {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward15Ft));
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward1Ft));
 			addSequential(new AutonIntakeOutWithTimeoutScale(1.0));
 		}
 
 		else if (doScale) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight60Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));
@@ -129,6 +133,7 @@ public class AutonCommandLeft extends CommandGroup {
 		else if (doOpScale) {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward18Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft100Degrees));
@@ -137,7 +142,6 @@ public class AutonCommandLeft extends CommandGroup {
 		}
 
 		else if (doScaleAndSwitch) {
-			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward20Ft));
 			addParallel(new LiftUpWithTimeout(3.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight60Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward2Ft));

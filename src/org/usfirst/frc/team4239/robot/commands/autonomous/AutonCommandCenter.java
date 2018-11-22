@@ -42,7 +42,7 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 			addParallel(new LiftDownWithTimeout(0.75));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
-			addParallel(new IntakeInWithTimeout(2.5));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
 			addParallel(new LiftUpWithTimeout(1.5));
@@ -57,11 +57,11 @@ public class AutonCommandCenter extends CommandGroup {
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward2Ft));
 			addParallel(new LiftDownWithTimeout(0.75));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateLeft90Degrees));
-			addParallel(new IntakeInWithTimeout(2.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveBackward3Ft));
 			addParallel(new LiftUpWithTimeout(1.5));
 			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight90Degrees));
+			addSequential(new DrivetrainFollowProfile(Trajectories.rotateRight87Degrees));
 			addSequential(new DrivetrainFollowProfile(Trajectories.driveForward3Ft));
 			addSequential(new AutonIntakeOutWithTimeout(0.5));
 			break;
